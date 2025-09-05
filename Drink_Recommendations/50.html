@@ -1,76 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>50嵐</title>
-  <link rel="stylesheet" href="style (1)-page1-2.css">
+  <link rel="stylesheet" href="style (1)-page1-2.css" />
   <style>
-    body {
-      background-image: url(images/y/bg.jpg);
-    }
+    /* 你原本頁面內的少量樣式（可留可移到 CSS 檔） */
+    body { background-image: url(images/y/bg.jpg); }
     hr.style-one {
       border: 0;
       height: 3.5px;
       background-image: linear-gradient(to right, #eff797, #eaf114, #e3e8ae);
     }
-    a {
-      font-style: normal;
-      text-decoration: none;
-      color: #73aa68;
+    a { text-decoration: none; color: #73aa68; }
+
+    /* 建議保留的最小結構樣式（若已在總 CSS 內處理可刪） */
+    .nav-container{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:8px 16px;background:#fff
     }
-    /* 漢堡按鈕樣式 */
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 16px;
-      background: #fff;
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .hamburger span {
-      height: 3px;
-      width: 25px;
-      background: #333;
-      margin: 4px 0;
-      border-radius: 2px;
-    }
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: #f9f9f9;
-      }
-      nav ul.show {
-        display: flex;
-      }
-      .hamburger {
-        display: flex;
-      }
+    .hamburger{display:none;flex-direction:column;cursor:pointer}
+    .hamburger span{height:3px;width:25px;background:#333;margin:4px 0;border-radius:2px}
+    @media (max-width:768px){
+      .hamburger{display:flex}
     }
   </style>
 </head>
 <body>
+
   <!-- 導覽容器 + 漢堡 -->
   <div class="nav-container">
-    <h2>50嵐</h2>
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <h2 aria-label="網站名稱">50嵐</h2>
+    <button class="hamburger" id="hamburger"
+            aria-label="開啟選單" aria-expanded="false" aria-controls="nav-list" type="button">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 
-  <nav>
-    <ul>
+  <!-- 導覽列 -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
       <li><a href="Home.html">首頁</a></li>
-      <li><a href="#">菜單</a>
+
+      <li>
+        <a href="#">菜單</a>
         <ul>
           <li><a href="images/macu-menu.jpg" loading="lazy">麻古茶坊</a></li>
           <li><a href="images/Oolong tea Project-menu.jpg" loading="lazy">得正</a></li>
@@ -86,74 +61,87 @@
           <li><a href="images/milksha-menu.png" loading="lazy">迷克夏</a></li>
         </ul>
       </li>
-      <li><a href="#">各店首頁</a>
+
+      <li>
+        <a href="#">各店首頁</a>
         <ul>
-          <li><a href="https://macutea.com.tw/" loading="lazy">麻古茶坊</a></li>
-          <li><a href="https://dejeng.com/" loading="lazy">得正</a></li>
-          <li><a href="https://www.kebuke.com/" loading="lazy">可不可熟成紅茶</a></li>
-          <li><a href="https://guiji-group.com/" loading="lazy">龜記</a></li>
-          <li><a href="http://50lan.com/web/news.asp" loading="lazy">五十嵐</a></li>
-          <li><a href="https://www.teatop.com.tw/" loading="lazy">台灣第一味</a></li>
-          <li><a href="https://tw.tp-tea.com/" loading="lazy">茶湯會</a></li>
-          <li><a href="https://8yotea.com/" loading="lazy">八曜和茶</a></li>
-          <li><a href="https://wanpotea.com/" loading="lazy">萬波</a></li>
-          <li><a href="https://www.wootea.com/" loading="lazy">五桐號</a></li>
-          <li><a href="https://www.aniceholiday.com.tw/" loading="lazy">一沐日</a></li>
-          <li><a href="http://www.milkshoptea.com/index.php" loading="lazy">迷克夏</a></li>
+          <li><a href="https://macutea.com.tw/" loading="lazy" target="_blank" rel="noopener">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" loading="lazy" target="_blank" rel="noopener">得正</a></li>
+          <li><a href="https://www.kebuke.com/" loading="lazy" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
+          <li><a href="https://guiji-group.com/" loading="lazy" target="_blank" rel="noopener">龜記</a></li>
+          <li><a href="http://50lan.com/web/news.asp" loading="lazy" target="_blank" rel="noopener">五十嵐</a></li>
+          <li><a href="https://www.teatop.com.tw/" loading="lazy" target="_blank" rel="noopener">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" loading="lazy" target="_blank" rel="noopener">茶湯會</a></li>
+          <li><a href="https://8yotea.com/" loading="lazy" target="_blank" rel="noopener">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" loading="lazy" target="_blank" rel="noopener">萬波</a></li>
+          <li><a href="https://www.wootea.com/" loading="lazy" target="_blank" rel="noopener">五桐號</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" loading="lazy" target="_blank" rel="noopener">一沐日</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" loading="lazy" target="_blank" rel="noopener">迷克夏</a></li>
         </ul>
       </li>
     </ul>
   </nav>
 
+  <!-- 頁首 LOGO -->
   <header class="header">
-        <a href="http://50lan.com/web/news.asp">
-            <img src="images/50/50.gif" alt=""><!--飲料店LOGO-->
+    <a href="http://50lan.com/web/news.asp" aria-label="前往 50嵐官方網站（新分頁開啟）" target="_blank" rel="noopener">
+      <img src="images/50/50.gif" alt="50嵐官方標誌" loading="lazy" />
+    </a>
+  </header>
+
+  <!-- 產品卡片 -->
+  <main>
+    <div class="container">
+      <div class="item">
+        <a href="50_page2_1.html">
+          <img src="images/50/50 no1.jpg" alt="50嵐 經典飲品一" loading="lazy" />
         </a>
-    </header>
-    <div class="container"><!--眾多飲料們的圖片-->
-        <div class="item">
-            <a href="50_page2_1.html">
-                <img src="images/50/50 no1.jpg" alt="">
-            </a>    
-        </div>
-        <div class="item">
-            <a href="50_page2_2.html">
-                <img src="images/50/50烏龍-1.jpg" alt="">
-            </a> 
-        </div>
-        <div class="item">
-            <a href="50_page2_3.html">
-                <img src="images/50/50 波霸-1.jpg" alt="">
-            </a>    
-        </div>
-        <div class="item">
-            <a href="50_page2_4.html">
-                <img src="images/50/50 8冰綠.jpeg" alt="">
-            </a> 
-        </div>
-        <div class="item">
-            <a href="50_page2_5.html">
-                <img src="images/50/50 ice.jpg" alt="">
-            </a> 
-        </div>
-        <div class="item">
-            <a href="50_page2_6.html">
-                <img src="images/50/50 多多綠-1.jpg" alt="">
-            </a>
-        </div>
+      </div>
+      <div class="item">
+        <a href="50_page2_2.html">
+          <img src="images/50/50烏龍-1.jpg" alt="50嵐 烏龍系列" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="50_page2_3.html">
+          <img src="images/50/50 波霸-1.jpg" alt="50嵐 波霸系列" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="50_page2_4.html">
+          <img src="images/50/50 8冰綠.jpeg" alt="50嵐 冰綠茶" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="50_page2_5.html">
+          <img src="images/50/50 ice.jpg" alt="50嵐 冰系列" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="50_page2_6.html">
+          <img src="images/50/50 多多綠-1.jpg" alt="50嵐 多多綠" loading="lazy" />
+        </a>
+      </div>
     </div>
+  </main>
 
-  <hr class="style-one">
+  <hr class="style-one" />
 
-  <div class="footer">
+  <!-- 頁尾 -->
+  <footer class="footer">
     <address>
       <p>僅學校繳交報告使用</p>
-      <a href="http://50lan.com/web/products.asp"><img src="images/menu.png" alt="50嵐MENU" loading="lazy">MENU</a>&nbsp;&nbsp;
-      <a href="https://www.facebook.com/people/50%E5%B5%90-%E4%B8%AD%E5%8D%80/100076062604036/"><img src="images/facebook.png" alt="50嵐FACEBOOK" loading="lazy">FACEBOOK</a>
+      <a href="http://50lan.com/web/products.asp" target="_blank" rel="noopener">
+        <img src="images/menu.png" alt="50嵐 MENU 圖示" loading="lazy" />MENU
+      </a>
+      &nbsp;&nbsp;
+      <a href="https://www.facebook.com/people/50%E5%B5%90-%E4%B8%AD%E5%8D%80/100076062604036/" target="_blank" rel="noopener">
+        <img src="images/facebook.png" alt="Facebook 圖示" loading="lazy" />FACEBOOK
+      </a>
     </address>
-  </div>
+  </footer>
 
-  <!-- 引入抽出的 JS -->
+  <!-- 共用 JS：控制漢堡按鈕與子選單 -->
   <script src="nav.js"></script>
 </body>
 </html>
