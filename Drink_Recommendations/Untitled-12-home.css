@@ -1,0 +1,268 @@
+/* ===============================
+   Base
+================================ */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, "Noto Sans TC", "PingFang TC", Roboto, system-ui, sans-serif;
+  color: #222;
+  background: #fff;
+}
+
+header {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+footer {
+  height: 100px;
+  text-align: center;
+  background-color: blanchedalmond;
+  line-height: 100px;
+  font-size: 14px;
+}
+
+/* ===============================
+   Nav (Dropdown)
+================================ */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px;
+}
+nav ul li {
+  display: inline-block;
+  position: relative;
+}
+nav ul li a {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+}
+nav ul li a:hover {
+  background: #cdbba7;
+  color: #fff;
+}
+nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background-color: #f9f9f9;
+  padding: 8px 0;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  z-index: 999;
+}
+nav ul li:hover > ul { display: block; }
+nav ul li ul li { display: block; }
+nav ul li ul li a { padding: 8px 16px; color: #333; }
+nav ul li ul li a:hover { background: #ddd; }
+
+/* ===============================
+   Slideshow
+================================ */
+.slideshow-container {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  z-index: 1;
+}
+.mySlides { display: none; }
+.mySlides img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.text {
+  color: #f2f2f2;
+  font-size: 1.1rem;
+  padding: 24px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+
+/* arrows */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 12px 14px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
+  user-select: none;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.28);
+  transition: background-color .25s ease, opacity .25s ease;
+}
+.prev { left: 8px; }
+.next { right: 8px; }
+.prev:hover, .next:hover { background: rgba(0,0,0,0.45); }
+
+/* dots */
+.dots { text-align: center; }
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 12px 5px 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color .25s ease, transform .15s ease;
+}
+.active, .dot:hover { background-color: #666; transform: scale(1.06); }
+
+/* fade animation */
+.fade { animation: fade 1.2s; }
+@keyframes fade {
+  from { opacity: .4; }
+  to   { opacity: 1;  }
+}
+
+/* ===============================
+   Cards Grid (centered)
+================================ */
+.card-deck {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 24px;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  justify-items: center;
+  align-items: start;
+}
+
+/* card container */
+.card {
+  width: 100%;
+  max-width: 320px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  overflow: hidden;
+  text-align: center;
+  margin: 0;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+.card > a {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+}
+
+/* image box */
+.image-container {
+  position: relative;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.image-container img {
+  display: block;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  transition: opacity .25s ease;
+}
+.image-container img:first-child {
+  position: relative;
+  z-index: 1;
+}
+.hover-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none; /* 不攔截滑鼠 */
+}
+.card:hover .hover-image {
+  opacity: 1; /* 顯示 hover 圖 */
+}
+.card:hover .image-container img:first-child {
+  opacity: 0; /* 隱藏原始圖 */
+}
+
+/* card text */
+.card-body { padding: 16px 20px 20px; }
+.card-title { margin: 0; font-size: 18px; font-weight: 700; }
+
+/* optional overlay */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  transition: opacity .25s;
+  z-index: 1;
+}
+.card:hover .card-overlay { opacity: 1; }
+
+/* info layer */
+.info {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0,0,0,.3);
+  text-align: center;
+  padding-top: 40px;
+  color: #fff;
+  transition: opacity .3s;
+  border-radius: 12px;
+  z-index: 1;
+}
+.card:hover .info { opacity: 1; }
+
+/* 系統名稱區塊 */
+.system-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 20px 0;       /* 上下留白 */
+  color: #111;
+}
+
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 992px) {
+  .image-container { height: 200px; }
+  .card-title { font-size: 17px; }
+}
+@media (max-width: 600px) {
+  nav ul { padding: 0 8px; }
+  nav ul li a { padding: 10px 12px; }
+  .image-container { height: 180px; }
+  .card-title { font-size: 16px; }
+  .card-deck { gap: 16px; padding: 0 16px; }
+  .prev, .next { font-size: 16px; padding: 10px 12px; }
+}

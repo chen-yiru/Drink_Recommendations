@@ -1,0 +1,111 @@
+img{
+    height: 300px;
+    width:300px;
+    display: block;
+   
+}
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+
+
+}
+
+
+
+.image {
+flex: 1;
+padding: 20px;
+margin-left: 180px;/*調整中線跟照片的距離*/
+margin-right: 150px;/*調整中線跟字的距離*/
+margin-top: 60px;
+
+}
+
+.image img {
+max-width: 100%;
+height: auto;
+}
+
+.text {
+flex: 1;
+padding: 100px 95px;/*調整中線長度&老實說我看不出來*/
+margin-left: -320px;/*調整中線跟照片的距離*/
+border-left: 1px solid #ccc;
+}
+
+nav ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+nav ul li {
+display: inline-block;
+position: relative;
+}
+
+nav ul li a {
+display: block;
+padding: 10px 20px;
+text-decoration: none;
+color: #333;
+}
+
+nav ul li ul {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+background-color: #f9f9f9;
+padding: 0;
+}
+
+nav ul li:hover > ul {
+display: block;
+}
+
+nav ul li ul li {
+width: 200px;
+float: none;
+display: list-item;
+position: relative;
+}
+
+nav ul li ul li a {
+padding: 8px 16px;
+color: #333;
+}
+
+nav ul li ul li a:hover {
+background-color: #ddd;
+}
+.menu a {
+display: block;
+padding: 0 30px;
+background-color: #fff;
+color: #333333;
+text-decoration: none;
+line-height: 40px;
+}
+.menu a:hover {
+background-color: #cdbba7;
+color: #ffffff;
+}
+
+.menu li:hover > a {
+background-color: #cdbba7;
+color: #ffffff;
+}
+.footer {
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+    line-height: 100px;
+    background-color: #e2dfdf;
+}
+.footer img {
+    width: 50px;
+    height: 50px;
+}

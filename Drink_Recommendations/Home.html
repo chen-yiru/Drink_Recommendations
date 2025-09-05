@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>呵 飲料</title>
+  <link rel="stylesheet" href="Untitled-12-home.css" />
+</head>
+
+<body class="body">
+
+  <!-- 系統名稱 -->
+  <div class="system-title">飲料推薦 👍</div>
+
+  <!-- 導覽列 -->
+  <nav>
+    <ul>
+      <li><a href="Home.html">首頁</a></li>
+      <li>
+        <a href="#">菜單</a>
+        <ul>
+          <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
+          <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
+          <li><a href="images/guiji-menu.jpg">龜記</a></li>
+          <li><a href="images/50-menu.png">五十嵐</a></li>
+          <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
+          <li><a href="images/tea-menu.jpg">茶湯會</a></li>
+          <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png">萬波</a></li>
+          <li><a href="images/wootea-menu.jpg">五桐號</a></li>
+          <li><a href="images/day-menu.jpg">一沐日</a></li>
+          <li><a href="images/milksha-menu.png">迷克夏</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/">得正</a></li>
+          <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
+          <li><a href="https://guiji-group.com/">龜記</a></li>
+          <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
+          <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
+          <li><a href="https://8yotea.com/">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/">萬波</a></li>
+          <li><a href="https://www.wootea.com/">五桐號</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php">迷克夏</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 輪播 -->
+  <header class="slideshow-container">
+    <div class="mySlides fade">
+      <img src="images/50-tc.jpg" alt="五十嵐 宣傳圖" />
+    </div>
+    <div class="mySlides fade">
+      <img src="images/8yo-tc.jpg" alt="八曜和茶 宣傳圖" />
+    </div>
+    <div class="mySlides fade">
+      <img src="images/guiji-tc.jpg" alt="龜記 宣傳圖" />
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10092;</a>
+    <a class="next" onclick="plusSlides(1)">&#10093;</a>
+
+    <div class="dots" style="text-align:center;">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+  </header>
+
+
+  <!-- 卡片 Grid -->
+  <main>
+    <section class="card-deck">
+      <div class="card">
+        <a href="macu.html">
+          <div class="image-container">
+            <img src="images/macu-facia.png" alt="麻古茶坊 logo" />
+            <img src="images/macu.png" alt="麻古茶坊 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">麻古茶坊</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="OOLONG_TEA_PROJECT.html">
+          <div class="image-container">
+            <img src="images/OOLONG TEA PROJECT-fecia.png" alt="得正 logo" />
+            <img src="images/OOLONG TEA PROJECT.png" alt="得正 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">得正</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="kbuku.html">
+          <div class="image-container">
+            <img src="images/kbuku-facia.png" alt="可不可熟成紅茶 logo" />
+            <img src="images/kbuku.jpg" alt="可不可熟成紅茶 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">可不可熟成紅茶</h5></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="card-deck">
+      <div class="card">
+        <a href="guiji.html">
+          <div class="image-container">
+            <img src="images/guiji-facia.jpg" alt="龜記 logo" />
+            <img src="images/guiju.png" alt="龜記 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">龜記</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="50.html">
+          <div class="image-container">
+            <img src="images/50-facia.png" alt="五十嵐 logo" />
+            <img src="images/50-1.webp" alt="五十嵐 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">五十嵐</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="tea_top.html">
+          <div class="image-container">
+            <img src="images/tea top-facia.jpg" alt="台灣第一味 logo" />
+            <img src="images/tea top-2.png" alt="台灣第一味 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">台灣第一味</h5></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="card-deck">
+      <div class="card">
+        <a href="tea.html">
+          <div class="image-container">
+            <img src="images/tea-facia.png" alt="茶湯會 logo" />
+            <img src="images/tp-tea-2.png" alt="茶湯會 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">茶湯會</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="8yo.html">
+          <div class="image-container">
+            <img src="images/8yo-facia.jpg" alt="八曜和茶 logo" />
+            <img src="images/8yo.png" alt="八曜和茶 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">八曜和茶</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="wanpo.html">
+          <div class="image-container">
+            <img src="images/wanpo-facia.png" alt="萬波 logo" />
+            <img src="images/wanpo.png" alt="萬波 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">萬波</h5></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="card-deck">
+      <div class="card">
+        <a href="wootea.html">
+          <div class="image-container">
+            <img src="images/wootea-fecia.png" alt="五桐號 logo" />
+            <img src="images/wootea-3.png" alt="五桐號 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">五桐號</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="aniceholiday.html">
+          <div class="image-container">
+            <img src="images/day-facia.jpg" alt="一沐日 logo" />
+            <img src="images/day-1.png" alt="一沐日 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">一沐日</h5></div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="milksha.html">
+          <div class="image-container">
+            <img src="images/milksha-facia.png" alt="迷客夏 logo" />
+            <img src="images/milksha-1.png" alt="迷客夏 hover" class="hover-image" />
+          </div>
+          <div class="card-body"><h5 class="card-title">迷客夏</h5></div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>僅學校繳交報告使用</p>
+  </footer>
+
+  <script src="nav.js"></script>
+  <!-- 輪播控制 -->
+  <script>
+    let slideIndex = 1;
+    function showSlides(n) {
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+      for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+      for (let i = 0; i < dots.length; i++) dots[i].classList.remove("active");
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].classList.add("active");
+    }
+    function plusSlides(n) { showSlides(slideIndex += n); }
+    function currentSlide(n) { showSlides(slideIndex = n); }
+    showSlides(slideIndex);
+    setInterval(() => { plusSlides(1); }, 4000);
+  </script>
+</body>
+</html>
