@@ -1,120 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>麻古茶坊</title><!--記得改名字!!-->
-    <link rel="stylesheet" href="style (1)-page1-2.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>麻古茶坊</title>
+  <link rel="stylesheet" href="style (1)-page1-2.css" />
+  <style>
+    /* 本頁少量補強（其餘請放進全站 CSS） */
+    body { background-image: url(images/y/bg.jpg); }
+    hr.style-one{
+      border:0;height:3.5px;
+      background-image:linear-gradient(to right,#a4c85b,#134d18,#a4c85b);
+    }
+    a{ text-decoration:none; color:#73aa68; }
+
+    /* 導覽容器 + 漢堡（若全站 CSS 已有可刪） */
+    .nav-container{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:8px 16px;background:#fff;
+    }
+    .brand{
+      display:inline-flex;align-items:center;gap:8px;
+      font-weight:700;font-size:18px;color:#222;
+    }
+    .brand img{ width:28px;height:28px;vertical-align:middle; }
+    .hamburger{
+      display:none;flex-direction:column;justify-content:center;gap:4px;
+      width:40px;height:36px;cursor:pointer;border:0;background:transparent;
+    }
+    .hamburger span{ height:3px;width:24px;background:#333;border-radius:2px;display:block; }
+    @media (max-width:768px){ .hamburger{ display:flex; } }
+
+    /* 讓本頁商品格子置中（若全站 .container 已處理可移除） */
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 16px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+    }
+    @media (max-width: 992px){ .container{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width: 600px){ .container{ grid-template-columns:1fr; } }
+  </style>
 </head>
-<style>
-    body {
-        background-image: url(images/y/bg.jpg);
-        /*背景*/
-    }
-    hr.style-one {
-        /*分隔線顏色*/
-        border: 0;
-        height: 3.5px;
-        background-image: linear-gradient(to right, #a4c85b, #134d18, #a4c85b);
-    }
-    a {
-        /*最下面超連結文字*/
-        font-style: normal;
-        text-decoration: none;
-        color: #73aa68;
-    }
-    .container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 5px 2px;
-    justify-content: center;
-    align-items: center;
-    margin-left:9.5%;
-}
-</style>
-
 <body>
-    <nav>
+
+  <!-- 導覽容器 + 漢堡按鈕 -->
+  <div class="nav-container">
+    <a class="brand" href="Home.html" aria-label="回首頁">
+
+    </a>
+
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- 導覽列（支援手機漢堡展開） -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
+      <li><a href="Home.html">首頁</a></li>
+
+      <li>
+        <a href="#">菜單</a>
         <ul>
-            <li><a href="Home.html">首頁</a></li>
-            <li><a href="#">菜單</a>
-                <ul>
-                    <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
-                    <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
-                    <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
-                    <li><a href="images/guiji-menu.jpg">龜記</a></li>
-                    <li><a href="images/50-menu.png">五十嵐</a></li>
-                    <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
-                    <li><a href="images/tea-menu.jpg">茶湯會</a></li>
-                    <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
-                    <li><a href="images/wanpo-menu.png">萬波</a></li>
-                    <li><a href="images/wootea-menu.jpg">五桐號</a></li>
-                    <li><a href="images/day-menu.jpg">一沐日</a></li>
-                    <li><a href="images/milksha-menu.png">迷克夏</a></li>
-                </ul>
-            </li>
-            <li><a href="#">各店首頁</a>
-                <ul>
-                    <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-                    <li><a href="https://dejeng.com/">得正</a></li>
-                    <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-                    <li><a href="https://guiji-group.com/">龜記</a></li>
-                    <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-                    <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-                    <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
-                    <li><a href="https://8yotea.com/">八曜和茶</a></li>
-                    <li><a href="https://wanpotea.com/">萬波</a></li>
-                    <li><a href="https://www.wootea.com/">五桐號</a></li>
-                    <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-                    <li><a href="http://www.milkshoptea.com/index.php">迷克夏</a></li>
-                </ul>
-            </li>
-
+          <li><a href="images/macu-menu.jpg" loading="lazy">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg" loading="lazy">得正</a></li>
+          <li><a href="images/kbuku-menu.jpg" loading="lazy">可不可熟成紅茶</a></li>
+          <li><a href="images/guiji-menu.jpg" loading="lazy">龜記</a></li>
+          <li><a href="images/50-menu.png" loading="lazy">五十嵐</a></li>
+          <li><a href="images/teatop-menu.jpg" loading="lazy">台灣第一味</a></li>
+          <li><a href="images/tea-menu.jpg" loading="lazy">茶湯會</a></li>
+          <li><a href="images/8yotea-menu.jpg" loading="lazy">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png" loading="lazy">萬波</a></li>
+          <li><a href="images/wootea-menu.jpg" loading="lazy">五桐號</a></li>
+          <li><a href="images/day-menu.jpg" loading="lazy">一沐日</a></li>
+          <li><a href="images/milksha-menu.png" loading="lazy">迷克夏</a></li>
         </ul>
-    </nav>
-    <header class="header">
-        <a href="https://macutea.com.tw/" target="_blank">
-            <img src="images/macu/1.png" alt=""><!--飲料店LOGO-->
-        </a>
-    </header>
-    <div class="container"><!--眾多飲料們的圖片-->
-        <div class="item">
-            <a href="mucu_2.html">
-                <img src="images/macu/2.png" alt=""></a>
-        </div>
-        <div class="item">
-            <a href="mucu_3.html">
-            <img src="images/macu/3.jpg" alt=""></a>
-        </div>
-        <div class="item">
-            <a href="mucu_4.html">
-            <img src="images/macu/4.jpg" alt=""></a>
-        </div>
-        <div class="item">
-            <a href="mucu_5.html">
-            <img src="images/macu/5.jpg" alt=""></a>
-        </div>
-        <div class="item">
-            <a href="mucu_6.html">
-            <img src="images/macu/6.jpg" alt=""></a>
-        </div>
-        <div class="item">
-            <a href="mucu_7.html">
-            <img src="images/macu/7.jpg" alt=""></a>
-        </div>
-    </div>
-    <hr class="style-one">
-    <div class="footer">
-        <address>
-            <p>僅學校繳交報告使用</p>
-            <a href="https://macutea.com.tw/drink.php" target="_blank"><img src="images/menu.png"
-                    alt="麻古茶坊MENU">MENU</a>&nbsp;&nbsp;<!--飲料店菜單-->
-            <a href="https://zh-tw.facebook.com/macu2008.tw/" target="_blank"><img src="images/facebook.png"
-                    alt="麻古茶坊FACEBOOK">FACEBOOK</a><!--飲料店臉書-->
-        </address>
-    </div>
-</body>
+      </li>
 
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener" loading="lazy">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener" loading="lazy">得正</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener" loading="lazy">可不可熟成紅茶</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener" loading="lazy">龜記</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener" loading="lazy">五十嵐</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener" loading="lazy">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener" loading="lazy">茶湯會</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener" loading="lazy">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener" loading="lazy">萬波</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener" loading="lazy">五桐號</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener" loading="lazy">一沐日</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener" loading="lazy">迷克夏</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 頁首 LOGO -->
+  <header class="header">
+    <a href="https://macutea.com.tw/" target="_blank" rel="noopener" aria-label="前往 麻古茶坊 官方網站（新分頁）">
+      <img src="images/macu/1.png" alt="麻古茶坊 官方標誌" loading="lazy" />
+    </a>
+  </header>
+
+  <!-- 產品清單 -->
+  <main>
+    <div class="container">
+      <div class="item">
+        <a href="mucu_2.html">
+          <img src="images/macu/2.png" alt="麻古茶坊 飲品 2" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="mucu_3.html">
+          <img src="images/macu/3.jpg" alt="麻古茶坊 飲品 3" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="mucu_4.html">
+          <img src="images/macu/4.jpg" alt="麻古茶坊 飲品 4" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="mucu_5.html">
+          <img src="images/macu/5.jpg" alt="麻古茶坊 飲品 5" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="mucu_6.html">
+          <img src="images/macu/6.jpg" alt="麻古茶坊 飲品 6" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="mucu_7.html">
+          <img src="images/macu/7.jpg" alt="麻古茶坊 飲品 7" loading="lazy" />
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <hr class="style-one" />
+
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <address>
+      <p>僅學校繳交報告使用</p>
+      <a href="https://macutea.com.tw/drink.php" target="_blank" rel="noopener">
+        <img src="images/menu.png" alt="麻古茶坊 MENU 圖示" loading="lazy" />MENU
+      </a>
+      &nbsp;&nbsp;
+      <a href="https://zh-tw.facebook.com/macu2008.tw/" target="_blank" rel="noopener">
+        <img src="images/facebook.png" alt="Facebook 圖示" loading="lazy" />FACEBOOK
+      </a>
+    </address>
+  </footer>
+
+  <!-- 共用 JS（漢堡選單＋輪播；本頁無輪播則只啟用選單） -->
+  <script src="nav.js"></script>
+</body>
 </html>
