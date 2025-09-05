@@ -1,8 +1,8 @@
-// ====== 可調參數 ======
-const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
+// ====== 可調參數（亦可在 HTML 的 .slideshow-container 上用 data-interval / data-start 覆寫）======
+const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
 
 (function () {
-  // 取得元素
+  // 取得主要容器（只支援單一輪播；要多個可用 querySelectorAll 迭代）
   const container = document.querySelector('.slideshow-container');
   const slides = Array.from(document.getElementsByClassName('mySlides'));
   const dots = Array.from(document.getElementsByClassName('dot'));
@@ -14,9 +14,25 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
     return;
   }
 
-  let slideIndex = 0;             // 0-based
+  // 讀取可選 data 屬性
+  const intervalFromData = Number(container.getAttribute('data-interval'));
+  const startFromData = Number(container.getAttribute('data-start'));
+  const AUTOPLAY_MS = Number.isFinite(intervalFromData) && intervalFromData > 0
+    ? intervalFromData
+    : SLIDE_AUTOPLAY_MS;
+
+  let slideIndex = Number.isFinite(startFromData) && startFromData >= 1 && startFromData <= slides.length
+    ? (startFromData - 1) // 轉 0-based
+    : 0;
+
   let timerId = null;
   let isPaused = false;
+
+  // Helper：設定某元素是否顯示
+  function setShown(el, shown) {
+    el.style.display = shown ? 'block' : 'none';
+    el.classList.toggle('active', shown);
+  }
 
   // 顯示指定索引
   function render(index) {
@@ -25,10 +41,8 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
     if (index < 0) index = slides.length - 1;
     slideIndex = index;
 
-    // 切換顯示
-    slides.forEach((s, i) => {
-      s.style.display = (i === slideIndex) ? 'block' : 'none';
-    });
+    // 切換顯示（同時加上 active class）
+    slides.forEach((s, i) => setShown(s, i === slideIndex));
 
     // dots（有就切換，沒有就忽略）
     if (dots.length) {
@@ -44,24 +58,28 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
 
   // 直接到第 n 張（1-based for HTML 相容）
   function goTo(n) {
-    render(Number(n) - 1);
+    const idx = Number(n) - 1;
+    if (Number.isFinite(idx)) render(idx);
   }
 
-  // 自動播放
+  // 自動播放控制
   function startAutoplay() {
     stopAutoplay();
-    timerId = setInterval(() => go(1), SLIDE_AUTOPLAY_MS);
+    timerId = setInterval(() => go(1), AUTOPLAY_MS);
   }
+
   function stopAutoplay() {
     if (timerId) {
       clearInterval(timerId);
       timerId = null;
     }
   }
+
   function pauseAutoplay() {
     isPaused = true;
     stopAutoplay();
   }
+
   function resumeAutoplay() {
     if (!isPaused) return;
     isPaused = false;
@@ -69,18 +87,26 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
   }
 
   // 初始化畫面與計時
-  render(0);
+  render(slideIndex);
   startAutoplay();
 
   // ====== 事件綁定 ======
-
-  // 與你原本 HTML 的 inline onclick 相容
+  // 與原本 HTML 的 inline onclick 相容
   window.plusSlides = function (n) { go(Number(n) || 1); };
   window.currentSlide = function (n) { goTo(n); };
 
   // 如果有箭頭，綁定點擊
   if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
   if (nextBtn) nextBtn.addEventListener('click', () => go(1));
+
+  // 若 dots 沒有 inline onclick，這裡一併補上
+  if (dots.length) {
+    dots.forEach((dot, i) => {
+      if (!dot.hasAttribute('onclick')) {
+        dot.addEventListener('click', () => goTo(i + 1));
+      }
+    });
+  }
 
   // 滑鼠移入暫停、移出繼續
   container.addEventListener('mouseenter', pauseAutoplay);
@@ -89,7 +115,7 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
     startAutoplay();
   });
 
-  // 視窗可見性改變（切分頁時暫停）
+  // 視窗可見性改變（切分頁時暫停 / 回來繼續）
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       stopAutoplay();
@@ -98,11 +124,31 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
     }
   });
 
-  // 鍵盤左右鍵切換
+  // 當輪播不在視口內時，暫停（省資源）；回到視口再恢復
+  let wasInView = true;
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.target !== container) return;
+        if (entry.isIntersecting) {
+          // 回到可視範圍
+          wasInView = true;
+          if (!isPaused && !timerId) startAutoplay();
+        } else {
+          // 離開可視範圍
+          wasInView = false;
+          stopAutoplay();
+        }
+      });
+    }, { threshold: 0.1 });
+    io.observe(container);
+  }
+
+  // 鍵盤左右鍵切換（輪播在視窗內才作用）
   document.addEventListener('keydown', (e) => {
-    // 只在輪播於視窗內時作用
     const rect = container.getBoundingClientRect();
-    const inView = rect.bottom > 0 && rect.top < (window.innerHeight || document.documentElement.clientHeight);
+    const viewportH = window.innerHeight || document.documentElement.clientHeight;
+    const inView = rect.bottom > 0 && rect.top < viewportH;
     if (!inView) return;
 
     if (e.key === 'ArrowLeft') {
@@ -139,11 +185,14 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒）
     if (touchMoved) {
       const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : touchStartX;
       const dx = endX - touchStartX;
-      if (dx > 30) go(-1);       // 右滑：上一張
-      if (dx < -30) go(1);       // 左滑：下一張
+      if (dx > 30) go(-1);   // 右滑：上一張
+      if (dx < -30) go(1);   // 左滑：下一張
     }
     isPaused = false;
-    startAutoplay();
+    // 只有在仍在視口內時才恢復
+    if (wasInView) startAutoplay();
   });
 
+  // 視窗卸載時清理 timer
+  window.addEventListener('beforeunload', stopAutoplay);
 })();
