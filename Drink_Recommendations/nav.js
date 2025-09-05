@@ -1,8 +1,166 @@
-// ====== 可調參數（亦可在 HTML 的 .slideshow-container 上用 data-interval / data-start 覆寫）======
-const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
+/* nav.js — 漢堡選單 + 輪播（合併版）
+ * 需求：
+ * 1) 導覽結構需包含：
+ *    - <button id="hamburger" ...>
+ *    - <nav id="site-nav"><ul id="nav-list">...</ul></nav>
+ *    - 子選單結構：<li><a>父層</a><ul>子選單</ul></li>
+ * 2) 輪播結構需包含（若需要）：
+ *    - <div class="slideshow-container" [data-interval="4000"] [data-start="1"]>
+ *        <div class="mySlides"> ... </div>
+ *        <div class="mySlides"> ... </div>
+ *        <a class="prev">‹</a>
+ *        <a class="next">›</a>
+ *        <span class="dot"></span>...
+ *      </div>
+ *
+ * 建議 CSS（手機）：
+ *  @media (max-width:768px){
+ *    #site-nav > ul { display:none; }
+ *    #site-nav.open > ul { display:flex; flex-direction:column; }
+ *    nav li ul { display:none !important; position:static !important; }
+ *    nav li.open > ul { display:block !important; }
+ *  }
+ */
 
+/* =========================
+   全域可調參數
+========================= */
+const MOBILE_BREAKPOINT = 768;    // ≤ 768px 視為手機
+const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
+
+/* =========================
+   漢堡選單 + 子選單
+========================= */
 (function () {
-  // 取得主要容器（只支援單一輪播；要多個可用 querySelectorAll 迭代）
+  const hamburger = document.getElementById('hamburger');
+  const siteNav   = document.getElementById('site-nav');
+  const navList   = document.getElementById('nav-list');
+
+  if (!hamburger || !siteNav || !navList) {
+    // 沒導覽元素就不啟用（避免報錯）
+    return;
+  }
+
+  const isMobile = () => window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+
+  function toggleNav(force) {
+    const willOpen = typeof force === 'boolean' ? force : !siteNav.classList.contains('open');
+    siteNav.classList.toggle('open', willOpen);
+    hamburger.classList.toggle('active', willOpen);
+    hamburger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    if (!willOpen) closeAllSubmenus();
+  }
+
+  function closeAllSubmenus() {
+    submenuParents.forEach(li => {
+      li.classList.remove('open');
+      const a = li.querySelector(':scope > a');
+      if (a) a.setAttribute('aria-expanded', 'false');
+      li.removeAttribute('data-armed'); // 取消「首次點擊不跳轉」保護
+    });
+  }
+
+  // 找出所有有子選單的 li
+  const submenuParents = Array.from(navList.querySelectorAll('li')).filter(li =>
+    li.querySelector(':scope > ul')
+  );
+
+  // 初始化有子選單的 li
+  submenuParents.forEach(li => {
+    li.classList.add('has-submenu');
+    const link = li.querySelector(':scope > a');
+    if (!link) return;
+
+    // ARIA
+    link.setAttribute('aria-haspopup', 'true');
+    link.setAttribute('aria-expanded', 'false');
+
+    // 手機點擊：展開/收合子選單；第二次點同一父層才真的導向
+    link.addEventListener('click', (e) => {
+      if (!isMobile()) return; // 桌機交給 CSS hover
+
+      const href = link.getAttribute('href') || '#';
+      const isHashOrVoid = href === '#' || href.trim().toLowerCase() === 'javascript:void(0)';
+      const armed = li.hasAttribute('data-armed');
+
+      // 若未展開，先展開並攔截跳轉
+      if (!li.classList.contains('open')) {
+        e.preventDefault();
+        // 關閉其他已開
+        submenuParents.forEach(other => {
+          if (other !== li) {
+            other.classList.remove('open');
+            const oa = other.querySelector(':scope > a');
+            if (oa) oa.setAttribute('aria-expanded', 'false');
+            other.removeAttribute('data-armed');
+          }
+        });
+        li.classList.add('open');
+        link.setAttribute('aria-expanded', 'true');
+
+        // 若 href 是實體連結，給一次「武裝」機會（第二次點才跳走）
+        if (!isHashOrVoid) {
+          li.setAttribute('data-armed', 'true');
+        }
+        return;
+      }
+
+      // 若已展開：
+      //  - 有子選單且 href 是實體連結：第一次點（armed=true）僅準備；第二次點才放行
+      if (!isHashOrVoid) {
+        if (!armed) {
+          e.preventDefault();
+          li.setAttribute('data-armed', 'true');
+          return;
+        }
+        // 第二次點：讓它照常導航，並關閉選單
+        toggleNav(false);
+        return;
+      }
+
+      // href 是 # 或 void(0) ：切換展開/收合
+      e.preventDefault();
+      const willOpen = !li.classList.contains('open');
+      li.classList.toggle('open', willOpen);
+      link.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      if (!willOpen) li.removeAttribute('data-armed');
+    });
+  });
+
+  // 漢堡按鈕：開/關主選單
+  hamburger.addEventListener('click', () => toggleNav());
+
+  // 點擊外部：若在手機狀態且目前開啟，則關閉
+  document.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    if (!siteNav.classList.contains('open')) return;
+
+    const insideNav = siteNav.contains(e.target) || hamburger.contains(e.target);
+    if (!insideNav) toggleNav(false);
+  });
+
+  // ESC 關閉
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && siteNav.classList.contains('open')) {
+      toggleNav(false);
+    }
+  });
+
+  // 視窗尺寸變更：離開手機狀態時重置
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      siteNav.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      closeAllSubmenus();
+    }
+  });
+})();
+
+/* =========================
+   輪播（Slideshow）
+========================= */
+(function () {
   const container = document.querySelector('.slideshow-container');
   const slides = Array.from(document.getElementsByClassName('mySlides'));
   const dots = Array.from(document.getElementsByClassName('dot'));
@@ -10,11 +168,11 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
   const nextBtn = document.querySelector('.next');
 
   if (!container || slides.length === 0) {
-    console.warn('[slideshow] 沒有找到 .slideshow-container 或 .mySlides，輪播未啟用');
+    // 沒有輪播結構就不啟用
     return;
   }
 
-  // 讀取可選 data 屬性
+  // 可用 data-interval / data-start 覆寫預設
   const intervalFromData = Number(container.getAttribute('data-interval'));
   const startFromData = Number(container.getAttribute('data-start'));
   const AUTOPLAY_MS = Number.isFinite(intervalFromData) && intervalFromData > 0
@@ -22,47 +180,40 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
     : SLIDE_AUTOPLAY_MS;
 
   let slideIndex = Number.isFinite(startFromData) && startFromData >= 1 && startFromData <= slides.length
-    ? (startFromData - 1) // 轉 0-based
+    ? (startFromData - 1)
     : 0;
 
   let timerId = null;
   let isPaused = false;
+  let wasInView = true;
 
-  // Helper：設定某元素是否顯示
   function setShown(el, shown) {
     el.style.display = shown ? 'block' : 'none';
     el.classList.toggle('active', shown);
   }
 
-  // 顯示指定索引
   function render(index) {
-    // 修正索引循環
     if (index >= slides.length) index = 0;
     if (index < 0) index = slides.length - 1;
     slideIndex = index;
 
-    // 切換顯示（同時加上 active class）
     slides.forEach((s, i) => setShown(s, i === slideIndex));
 
-    // dots（有就切換，沒有就忽略）
     if (dots.length) {
       dots.forEach(d => d.classList.remove('active'));
       if (dots[slideIndex]) dots[slideIndex].classList.add('active');
     }
   }
 
-  // 下一張/上一張
   function go(delta) {
     render(slideIndex + delta);
   }
 
-  // 直接到第 n 張（1-based for HTML 相容）
   function goTo(n) {
     const idx = Number(n) - 1;
     if (Number.isFinite(idx)) render(idx);
   }
 
-  // 自動播放控制
   function startAutoplay() {
     stopAutoplay();
     timerId = setInterval(() => go(1), AUTOPLAY_MS);
@@ -86,20 +237,19 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
     startAutoplay();
   }
 
-  // 初始化畫面與計時
+  // 初始化
   render(slideIndex);
   startAutoplay();
 
-  // ====== 事件綁定 ======
-  // 與原本 HTML 的 inline onclick 相容
+  // 與 inline onclick 相容
   window.plusSlides = function (n) { go(Number(n) || 1); };
   window.currentSlide = function (n) { goTo(n); };
 
-  // 如果有箭頭，綁定點擊
+  // 按鈕
   if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
   if (nextBtn) nextBtn.addEventListener('click', () => go(1));
 
-  // 若 dots 沒有 inline onclick，這裡一併補上
+  // dots 沒有 inline 的話補監聽
   if (dots.length) {
     dots.forEach((dot, i) => {
       if (!dot.hasAttribute('onclick')) {
@@ -108,34 +258,28 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
     });
   }
 
-  // 滑鼠移入暫停、移出繼續
+  // 滑鼠 hover 控制
   container.addEventListener('mouseenter', pauseAutoplay);
   container.addEventListener('mouseleave', () => {
     isPaused = false;
     startAutoplay();
   });
 
-  // 視窗可見性改變（切分頁時暫停 / 回來繼續）
+  // 分頁切換可見性
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      stopAutoplay();
-    } else if (!isPaused) {
-      startAutoplay();
-    }
+    if (document.hidden) stopAutoplay();
+    else if (!isPaused) startAutoplay();
   });
 
-  // 當輪播不在視口內時，暫停（省資源）；回到視口再恢復
-  let wasInView = true;
+  // 不在視口內暫停
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.target !== container) return;
         if (entry.isIntersecting) {
-          // 回到可視範圍
           wasInView = true;
           if (!isPaused && !timerId) startAutoplay();
         } else {
-          // 離開可視範圍
           wasInView = false;
           stopAutoplay();
         }
@@ -144,21 +288,18 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
     io.observe(container);
   }
 
-  // 鍵盤左右鍵切換（輪播在視窗內才作用）
+  // 鍵盤左右鍵
   document.addEventListener('keydown', (e) => {
     const rect = container.getBoundingClientRect();
     const viewportH = window.innerHeight || document.documentElement.clientHeight;
     const inView = rect.bottom > 0 && rect.top < viewportH;
     if (!inView) return;
 
-    if (e.key === 'ArrowLeft') {
-      go(-1);
-    } else if (e.key === 'ArrowRight') {
-      go(1);
-    }
+    if (e.key === 'ArrowLeft') go(-1);
+    else if (e.key === 'ArrowRight') go(1);
   });
 
-  // 觸控滑動切換（手機/平板）
+  // 觸控滑動（手機）
   let touchStartX = 0;
   let touchStartY = 0;
   let touchMoved = false;
@@ -175,7 +316,6 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
     if (!e.touches || !e.touches[0]) return;
     const dx = e.touches[0].clientX - touchStartX;
     const dy = e.touches[0].clientY - touchStartY;
-    // 判斷是否為水平滑動
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 20) {
       touchMoved = true;
     }
@@ -185,14 +325,13 @@ const SLIDE_AUTOPLAY_MS = 4000; // 自動播放間隔（毫秒，預設 4000）
     if (touchMoved) {
       const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : touchStartX;
       const dx = endX - touchStartX;
-      if (dx > 30) go(-1);   // 右滑：上一張
-      if (dx < -30) go(1);   // 左滑：下一張
+      if (dx > 30) go(-1);
+      if (dx < -30) go(1);
     }
     isPaused = false;
-    // 只有在仍在視口內時才恢復
     if (wasInView) startAutoplay();
   });
 
-  // 視窗卸載時清理 timer
+  // 卸載清理
   window.addEventListener('beforeunload', stopAutoplay);
 })();
