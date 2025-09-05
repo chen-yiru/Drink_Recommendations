@@ -8,14 +8,21 @@ html, body {
   background: #fff;
 }
 
-/* ========== Global img（維持原本比例） ========== */
+/* ========== Global img（維持比例，不再強制 300x300） ========== */
 img {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-/* ========== Container (圖片上＋分隔線＋文字下) ========== */
+/* 列表頁縮圖（例如首頁 .list .item 用 300x300） */
+.list .item img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;  /* 超出裁切，保持方形 */
+}
+
+/* ========== 詳細頁 Container (圖片上＋分隔線＋文字下) ========== */
 .container {
   display: flex;
   flex-direction: column;   /* 垂直排列 */
@@ -27,18 +34,18 @@ img {
   border-radius: 40px;
 }
 
-/* 圖片區：置中 */
+/* 詳細頁圖片 */
 .container .image {
   display: flex;
   justify-content: center;   /* 水平置中圖片 */
-  align-items: center;       /* 垂直置中圖片 */
+  align-items: center;
   width: 100%;
   margin: 0 auto;
   padding: 0;
 }
 .container .image img {
   border-radius: 12px;
-  max-width: 25%;   /* 調整圖片大小比例 */
+  width: clamp(160px, 25%, 280px);  /* 視窗縮放，最大 280px，最小 160px */
   height: auto;
 }
 
@@ -55,7 +62,7 @@ img {
 .container .text {
   text-align: left;
   padding: 0 20px;
-  max-width: 800px;  /* 文字區寬度限制，避免太散 */
+  max-width: 800px;  /* 避免文字太散 */
 }
 .container .text h2 {
   margin-top: 0;
