@@ -7,7 +7,7 @@
   <title>八曜和茶</title>
   <link rel="stylesheet" href="style (1)-page1-2.css" />
   <style>
-    /* 僅本頁用到的少量補強（其餘請放進你的全站 CSS） */
+    /* 本頁少量補強（其餘請放全站 CSS） */
     body { background-image: url(images/y/bg.jpg); }
     hr.style-one {
       border: 0;
@@ -16,7 +16,7 @@
     }
     a { text-decoration: none; color: #73aa68; }
 
-    /* 導覽容器與漢堡按鈕（若已在全站 CSS 內定義可刪） */
+    /* 導覽容器與漢堡（若全站 CSS 已有可刪） */
     .nav-container {
       display: flex;
       align-items: center;
@@ -48,9 +48,7 @@
     .hamburger span {
       height: 3px; width: 24px; background: #333; border-radius: 2px; display: block;
     }
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-    }
+    @media (max-width: 768px) { .hamburger { display: flex; } }
   </style>
 </head>
 <body>
@@ -71,7 +69,7 @@
     </button>
   </div>
 
-  <!-- 導覽列（支援手機漢堡展開） -->
+  <!-- 導覽列（配合 nav.js 手機展開） -->
   <nav id="site-nav" aria-label="主選單">
     <ul id="nav-list">
       <li><a href="Home.html">首頁</a></li>
@@ -173,7 +171,7 @@
     </address>
   </footer>
 
-  <!-- 共用 JS（漢堡選單＋輪播；本頁沒輪播則只啟用選單） -->
+  <!-- 共用 JS（漢堡選單＋輪播；本頁無輪播則只啟用選單） -->
   <script src="nav.js"></script>
 </body>
 </html>
