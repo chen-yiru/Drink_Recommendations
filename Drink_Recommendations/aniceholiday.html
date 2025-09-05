@@ -1,118 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一沐日</title><!--記得改名字!!-->
-    <link rel="stylesheet" href="style (1)-page1-2.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>一沐日</title>
+  <link rel="stylesheet" href="style (1)-page1-2.css" />
+  <style>
+    /* 本頁少量補強：其餘已放全站 CSS */
+    body { background-image: url(images/y/bg.jpg); }
+    hr.style-one{
+      border:0;height:3.5px;
+      background-image:linear-gradient(to right,#a4c85b,#134d18,#a4c85b);
+    }
+    a{ text-decoration:none; color:#73aa68; }
+
+    /* 導覽容器 + 漢堡（若全站 CSS 已有可刪） */
+    .nav-container{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:8px 16px;background:#fff;
+    }
+    .brand{
+      display:inline-flex;align-items:center;gap:8px;
+      font-weight:700;font-size:18px;color:#222;
+    }
+    .brand img{ width:28px;height:28px;vertical-align:middle; }
+    .hamburger{
+      display:none;flex-direction:column;justify-content:center;gap:4px;
+      width:40px;height:36px;cursor:pointer;border:0;background:transparent;
+    }
+    .hamburger span{ height:3px;width:24px;background:#333;border-radius:2px;display:block; }
+    @media (max-width:768px){ .hamburger{ display:flex; } }
+  </style>
 </head>
-<style>
-    body {
-        background-image: url(images/y/bg.jpg);
-        /*背景*/
-    }
-    hr.style-one {
-        /*分隔線顏色*/
-        border: 0;
-        height: 3.5px;
-        background-image: linear-gradient(to right, #a4c85b, #134d18, #a4c85b);
-    }
-    a {
-        /*最下面超連結文字*/
-        font-style: normal;
-        text-decoration: none;
-        color: #73aa68;
-    }
-</style>
-
 <body>
-    <nav>
-        <ul>
-          <li><a href="Home.html">首頁</a></li>
-          <li><a href="#">菜單</a>
-            <ul>
-              <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
-              <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
-              <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
-              <li><a href="images/guiji-menu.jpg">龜記</a></li>
-              <li><a href="images/50-menu.png">五十嵐</a></li>
-              <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
-              <li><a href="images/tea-menu.jpg">茶湯會</a></li>
-              <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
-              <li><a href="images/wanpo-menu.png">萬波</a></li>
-              <li><a href="images/wootea-menu.jpg">五桐號</a></li>
-              <li><a href="images/day-menu.jpg">一沐日</a></li>
-              <li><a href="images/milksha-menu.png">迷克夏</a></li>
-            </ul>
-          </li>
-          <li><a href="#">各店首頁</a>
-            <ul>
-              <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-              <li><a href="https://dejeng.com/">得正</a></li>
-              <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-              <li><a href="https://guiji-group.com/">龜記</a></li>
-              <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-              <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-              <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
-              <li><a href="https://8yotea.com/">八曜和茶</a></li>
-              <li><a href="https://wanpotea.com/">萬波</a></li>
-              <li><a href="https://www.wootea.com/">五桐號</a></li>
-              <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-              <li><a href="http://www.milkshoptea.com/index.php">迷克夏</a></li>
-            </ul>
-          </li>
-     
-        </ul>
-      </nav>
-    <header class="header">
-        <a href="http://www.aniceholiday.com.tw/">
-            <img src="images/y/ylogo.png" alt=""><!--飲料店LOGO-->
-        </a>
-    </header>
-    <div class="container"><!--眾多飲料們的圖片-->
-        <div class="item">
-            <a href="aniceholiday_page2_1.html">
-                <img src="images/y/milktea1.jpg" alt="">
-            </a>    
-        </div>
-        <div class="item">
-            <a href="aniceholiday_page2_2.html">
-                <img src="images/y/jellylemon.jpg" alt="">
-            </a>
-        </div>
-        <div class="item">
-            <a href="aniceholiday_page2_3.html">
-                <img src="images/y/jellymilktea.jpg" alt="">
-            </a>
-        </div>
-        <div class="item">
-            <a href="aniceholiday_page2_4.html">
-                <img src="images/y/latte.jpeg" alt="">
-            </a>
-        </div>
-        <div class="item">
-            <a href="aniceholiday_page2_5.html">
-                <img src="images/y/greentea.jpg" alt="">
-            </a>
-        </div>
-        <div class="item">
-            <a href="aniceholiday_page2_6.html">
-                <img src="images/y/sesame.jpg" alt="">
-            </a>
-        </div>
-    </div>
-    <hr class="style-one">
-    <div class="footer">
-        <address>
-            <p>僅學校繳交報告使用</p>
-            <a href="http://www.aniceholiday.com.tw/menu"><img src="images/menu.png"
-                    alt="一沐日MENU">MENU</a>&nbsp;&nbsp;<!--飲料店菜單-->
-            <a href="http://www.facebook.com/anicehoilday/"><img src="images/facebook.png"
-                    alt="一沐日FACEBOOK">FACEBOOK</a><!--飲料店臉書-->
-        </address>
-    </div>
-</body>
 
+  <!-- 導覽容器 + 漢堡 -->
+  <div class="nav-container">
+    <a class="brand" href="Home.html" aria-label="回首頁">
+      
+    </a>
+
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- 導覽列（支援手機漢堡展開） -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
+      <li><a href="Home.html">首頁</a></li>
+
+      <li>
+        <a href="#">菜單</a>
+        <ul>
+          <li><a href="images/macu-menu.jpg" loading="lazy">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg" loading="lazy">得正</a></li>
+          <li><a href="images/kbuku-menu.jpg" loading="lazy">可不可熟成紅茶</a></li>
+          <li><a href="images/guiji-menu.jpg" loading="lazy">龜記</a></li>
+          <li><a href="images/50-menu.png" loading="lazy">五十嵐</a></li>
+          <li><a href="images/teatop-menu.jpg" loading="lazy">台灣第一味</a></li>
+          <li><a href="images/tea-menu.jpg" loading="lazy">茶湯會</a></li>
+          <li><a href="images/8yotea-menu.jpg" loading="lazy">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png" loading="lazy">萬波</a></li>
+          <li><a href="images/wootea-menu.jpg" loading="lazy">五桐號</a></li>
+          <li><a href="images/day-menu.jpg" loading="lazy">一沐日</a></li>
+          <li><a href="images/milksha-menu.png" loading="lazy">迷克夏</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener" loading="lazy">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener" loading="lazy">得正</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener" loading="lazy">可不可熟成紅茶</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener" loading="lazy">龜記</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener" loading="lazy">五十嵐</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener" loading="lazy">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener" loading="lazy">茶湯會</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener" loading="lazy">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener" loading="lazy">萬波</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener" loading="lazy">五桐號</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener" loading="lazy">一沐日</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener" loading="lazy">迷克夏</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 頁首 LOGO -->
+  <header class="header">
+    <a href="http://www.aniceholiday.com.tw/" target="_blank" rel="noopener" aria-label="前往 一沐日 官方網站（新分頁）">
+      <img src="images/y/ylogo.png" alt="一沐日 官方標誌" loading="lazy" />
+    </a>
+  </header>
+
+  <!-- 產品清單 -->
+  <main>
+    <div class="container">
+      <div class="item">
+        <a href="aniceholiday_page2_1.html">
+          <img src="images/y/milktea1.jpg" alt="一沐日 奶茶 1" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="aniceholiday_page2_2.html">
+          <img src="images/y/jellylemon.jpg" alt="一沐日 蒟蒻檸檬" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="aniceholiday_page2_3.html">
+          <img src="images/y/jellymilktea.jpg" alt="一沐日 蒟蒻奶茶" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="aniceholiday_page2_4.html">
+          <img src="images/y/latte.jpeg" alt="一沐日 拿鐵" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="aniceholiday_page2_5.html">
+          <img src="images/y/greentea.jpg" alt="一沐日 綠茶" loading="lazy" />
+        </a>
+      </div>
+      <div class="item">
+        <a href="aniceholiday_page2_6.html">
+          <img src="images/y/sesame.jpg" alt="一沐日 黑芝麻飲" loading="lazy" />
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <hr class="style-one" />
+
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <address>
+      <p>僅學校繳交報告使用</p>
+      <a href="http://www.aniceholiday.com.tw/menu" target="_blank" rel="noopener">
+        <img src="images/menu.png" alt="一沐日 MENU 圖示" loading="lazy" />MENU
+      </a>
+      &nbsp;&nbsp;
+      <a href="http://www.facebook.com/anicehoilday/" target="_blank" rel="noopener">
+        <img src="images/facebook.png" alt="Facebook 圖示" loading="lazy" />FACEBOOK
+      </a>
+    </address>
+  </footer>
+
+  <!-- 共用 JS（漢堡選單＋輪播；本頁無輪播則只啟用選單） -->
+  <script src="nav.js"></script>
+</body>
 </html>
