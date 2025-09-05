@@ -1,111 +1,259 @@
-img{
-    height: 300px;
-    width:300px;
-    display: block;
-   
-}
-body {
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 0;
-
-
+/* ========== Reset / Base ========== */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, "Noto Sans TC", "PingFang TC", Roboto, system-ui, sans-serif;
+  color: #333;
+  background: #fff;
 }
 
+/* ========== Global img（維持你原本 300x300） ========== */
+img {
+  height: 300px;
+  width: 300px;
+  display: block;
+}
 
+/* ========== Layout（你的圖片＋文字區） ========== */
+body { margin: 0; padding: 0; }
 
 .image {
-flex: 1;
-padding: 20px;
-margin-left: 180px;/*調整中線跟照片的距離*/
-margin-right: 150px;/*調整中線跟字的距離*/
-margin-top: 60px;
-
+  flex: 1;
+  padding: 20px;
+  margin-left: 180px;   /* 調整中線跟照片的距離 */
+  margin-right: 150px;  /* 調整中線跟字的距離 */
+  margin-top: 60px;
 }
-
 .image img {
-max-width: 100%;
-height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .text {
-flex: 1;
-padding: 100px 95px;/*調整中線長度&老實說我看不出來*/
-margin-left: -320px;/*調整中線跟照片的距離*/
-border-left: 1px solid #ccc;
+  flex: 1;
+  padding: 100px 95px;  /* 調整中線長度 */
+  margin-left: -320px;  /* 調整中線跟照片的距離 */
+  border-left: 1px solid #ccc;
 }
 
-nav ul {
-list-style: none;
-margin: 0;
-padding: 0;
-}
-
-nav ul li {
-display: inline-block;
-position: relative;
-}
-
-nav ul li a {
-display: block;
-padding: 10px 20px;
-text-decoration: none;
-color: #333;
-}
-
-nav ul li ul {
-display: none;
-position: absolute;
-top: 100%;
-left: 0;
-background-color: #f9f9f9;
-padding: 0;
-}
-
-nav ul li:hover > ul {
-display: block;
-}
-
-nav ul li ul li {
-width: 200px;
-float: none;
-display: list-item;
-position: relative;
-}
-
-nav ul li ul li a {
-padding: 8px 16px;
-color: #333;
-}
-
-nav ul li ul li a:hover {
-background-color: #ddd;
-}
-.menu a {
-display: block;
-padding: 0 30px;
-background-color: #fff;
-color: #333333;
-text-decoration: none;
-line-height: 40px;
-}
-.menu a:hover {
-background-color: #cdbba7;
-color: #ffffff;
-}
-
-.menu li:hover > a {
-background-color: #cdbba7;
-color: #ffffff;
-}
+/* ========== Footer ========== */
 .footer {
-    margin-top: 10px;
-    align-items: center;
-    text-align: center;
-    line-height: 100px;
-    background-color: #e2dfdf;
+  margin-top: 10px;
+  align-items: center;
+  text-align: center;
+  line-height: 100px;
+  background-color: #e2dfdf;
 }
 .footer img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
+
+/* ========== 舊 menu 類別（若還在用就保留） ========== */
+.menu a {
+  display: block;
+  padding: 0 30px;
+  background-color: #fff;
+  color: #333333;
+  text-decoration: none;
+  line-height: 40px;
+}
+.menu a:hover,
+.menu li:hover > a {
+  background-color: #cdbba7;
+  color: #ffffff;
+}
+
+/* =================================================================
+   導覽列（桌機＋行動版）
+   結構建議：
+   <div class="nav-container">
+     <a class="brand" href="Home.html"><img ...></a>
+     <button id="hamburger" class="hamburger" aria-controls="nav-list" aria-expanded="false">...</button>
+   </div>
+   <nav id="site-nav"><ul id="nav-list"> ... </ul></nav>
+   ================================================================= */
+
+/* 置頂容器（品牌＋漢堡） */
+.nav-container {
+  position: sticky;
+  top: 0;
+  z-index: 10001; /* 高於 nav */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #222;
+  text-decoration: none;
+}
+.brand img { width: 28px; height: 28px; vertical-align: middle; }
+
+/* 漢堡按鈕（桌機隱藏，手機顯示） */
+.hamburger {
+  display: none;              /* 桌機隱藏 */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 38px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  z-index: 10002;             /* 確保能點到 */
+  -webkit-tap-highlight-color: transparent;
+}
+.hamburger span {
+  height: 3px;
+  width: 26px;
+  background: #000;
+  border-radius: 2px;
+  display: block;
+  margin: 0 auto;
+}
+/*（可選）點開時做 X 動畫，需要搭配 JS 切 .active */
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.hamburger span { transition: transform .2s ease, opacity .2s ease; }
+
+/* nav 本體（桌機） */
+nav#site-nav, nav {
+  background: #fff;
+  position: sticky;
+  top: 56px;                  /* 與 .nav-container 高度錯開 */
+  z-index: 10000;
+  border-bottom: 1px solid #eee;
+}
+
+/* 桌機：主選單水平排列 */
+nav > ul,
+nav#site-nav > ul {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 8px 16px;
+}
+
+/* 桌機：選單項目＋連結 */
+nav ul li { position: relative; }
+nav ul li > a {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+  line-height: 1.2;
+}
+nav ul li > a:hover {
+  background-color: #cdbba7;
+  color: #fff;
+}
+
+/* 桌機：子選單（hover 展開） */
+nav ul li ul {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 200px;
+  background-color: #f9f9f9;
+  padding: 8px 0;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  z-index: 20;
+}
+nav ul li:hover > ul { display: block; }
+nav ul li ul li { width: 100%; display: block; }
+nav ul li ul li a {
+  padding: 8px 16px;
+  color: #333;
+  border-radius: 0;
+}
+nav ul li ul li a:hover { background-color: #ddd; }
+
+/* ========== 行動版規則（要配合 nav.js） ========== */
+@media (max-width: 768px) {
+  /* 顯示漢堡 */
+  .hamburger { display: inline-flex; }
+
+  /* 行動版：nav 頂到最上面（與 nav-container 合併） */
+  nav#site-nav, nav { top: 0; }
+
+  /* 主選單預設收合；.open 時展開 */
+  nav#site-nav > ul,
+  nav > ul {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0;
+    background: #f9f9f9;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+  }
+  nav#site-nav.open > ul,
+  nav.open > ul {
+    display: flex;
+  }
+
+  /* 主層連結（更好點） */
+  nav ul li > a {
+    padding: 12px 14px;
+    border-radius: 0;
+  }
+
+  /* 子選單：手機預設關閉，點父層 li.open 展開（由 JS 控制 class） */
+  nav ul li ul {
+    display: none !important;      /* 覆寫桌機 hover */
+    position: static !important;   /* 手機不浮出 */
+    box-shadow: none !important;
+    background: transparent;
+    padding: 0 0 6px 0;
+    margin: 0 0 0 12px;            /* 次層縮排 */
+    border-radius: 0;
+  }
+  nav li.open > ul { display: block !important; }
+
+  /* 禁用手機 hover 展開 */
+  nav ul li:hover > ul { display: none; }
+}
+
+/* 讓點擊更舒服（移除藍色高亮） */
+nav a, .hamburger { -webkit-tap-highlight-color: transparent; }
+
+/* ========== 你原本的 nav 基礎（相容舊寫法；桌機有效） ========== */
+nav ul { list-style: none; margin: 0; padding: 0; }
+nav ul li { display: inline-block; position: relative; }
+nav ul li a { display: block; padding: 10px 20px; text-decoration: none; color: #333; }
+/* 這段舊 hover 子選單只在桌機有作用，手機已被上面的 @media 覆寫 */
+nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f9f9f9;
+  padding: 0;
+}
+nav ul li:hover > ul { display: block; }
+nav ul li ul li {
+  width: 200px;
+  float: none;
+  display: list-item;
+  position: relative;
+}
+nav ul li ul li a { padding: 8px 16px; color: #333; }
+nav ul li ul li a:hover { background-color: #ddd; }
