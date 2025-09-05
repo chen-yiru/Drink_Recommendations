@@ -19,21 +19,26 @@ img {
 .container {
   display: flex;
   flex-direction: column;   /* 垂直排列 */
-  align-items: center;
+  align-items: center;      /* 水平置中 */
+  justify-content: center;  /* 垂直置中 */
   margin: 20px;
   padding: 20px;
   background-color: rgba(255, 236, 168); /* 背景黃色 */
   border-radius: 40px;
 }
 
-/* 圖片區 */
+/* 圖片區：置中 */
 .container .image {
-  margin: 0;
+  display: flex;
+  justify-content: center;   /* 水平置中圖片 */
+  align-items: center;       /* 垂直置中圖片 */
+  width: 100%;
+  margin: 0 auto;
   padding: 0;
 }
 .container .image img {
   border-radius: 12px;
-  max-width: 100%;
+  max-width: 25%;   /* 調整圖片大小比例 */
   height: auto;
 }
 
@@ -50,6 +55,7 @@ img {
 .container .text {
   text-align: left;
   padding: 0 20px;
+  max-width: 800px;  /* 文字區寬度限制，避免太散 */
 }
 .container .text h2 {
   margin-top: 0;
