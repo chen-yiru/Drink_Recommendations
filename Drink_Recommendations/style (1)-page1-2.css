@@ -8,31 +8,26 @@ html, body {
   background: #fff;
 }
 
-/* ========== Header ========== */
+/* ========== Header（頁首區：LOGO 等） ========== */
 header {
   background-repeat: no-repeat;
   background-color: rgb(250, 250, 250);
   text-align: center;
   margin: 0 0 10px 0;
-  padding: 16px 0; /* 與內容留白，避免太擠 */
+  padding: 16px 0;               /* 與內容留白，避免太擠 */
 }
 
 /* ========== Grid 容器（置中＋響應） ========== */
 .container {
-  max-width: 1200px;        /* 版心最大寬 */
-  margin: 0 auto;           /* 水平置中 */
-  padding: 0 16px;          /* 手機左右留白 */
+  max-width: 1200px;             /* 版心最大寬 */
+  margin: 0 auto;                /* 水平置中 */
+  padding: 0 16px;               /* 手機左右留白 */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px 8px;
 }
-
-@media (max-width: 992px) {
-  .container { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .container { grid-template-columns: 1fr; }
-}
+@media (max-width: 992px) { .container { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .container { grid-template-columns: 1fr; } }
 
 /* 卡片內層置中 */
 .item {
@@ -75,50 +70,99 @@ footer {
   color: #333;
 }
 
-/* ========== 導覽列（桌機） ========== */
-/* 容器（在 HTML 中位於 <nav> 之前；z-index 高以免被蓋） */
+/* =========================================================
+   導覽列（nav）— 桌機預設、手機以 @media 覆寫
+   結構：.nav-container（含品牌與 .hamburger） + <nav id="site-nav"><ul>...</ul></nav>
+   ========================================================= */
+
+/* 置頂容器（品牌 + 漢堡） */
 .nav-container {
+  position: sticky;
+  top: 0;
+  z-index: 10001;                /* 高於 nav 本體 */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 16px;
+  gap: 12px;
+  padding: 10px 16px;
   background: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 10001;
+  border-bottom: 1px solid #eee;
+}
+
+/* 品牌（可只放圖；文字可有可無） */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #222;
+  text-decoration: none;
+}
+.brand img { width: 28px; height: 28px; vertical-align: middle; }
+
+/* 漢堡按鈕（桌機隱藏，手機顯示） */
+.hamburger {
+  display: none;                 /* 桌機隱藏 */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;                   /* 放大可點範圍 */
+  height: 38px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  z-index: 10002;                /* 再高一層，確保能點到 */
+  -webkit-tap-highlight-color: transparent;
+}
+.hamburger span {
+  height: 3px;
+  width: 26px;
+  background: #000;              /* 深色，確保可見 */
+  border-radius: 2px;
+  display: block;
+  margin: 0 auto;
 }
 
 /* 主 nav 區塊 */
 nav#site-nav, nav {
   background: #fff;
-  border-bottom: 1px solid #eee;
   position: sticky;
-  top: 0;
+  top: 56px;                     /* 與 .nav-container 高度錯開，避免重疊 */
   z-index: 10000;
+  border-bottom: 1px solid #eee;
 }
 
-nav ul {
+/* 桌機：主選單水平排列 */
+nav > ul,
+nav#site-nav > ul {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   list-style: none;
   margin: 0;
-  padding: 0 16px;
+  padding: 8px 16px;
 }
+
+/* 桌機：選單項目 */
 nav ul li {
-  display: inline-block;
   position: relative;
 }
-nav ul li a {
+nav ul li > a {
   display: block;
-  padding: 10px 20px;
+  padding: 10px 16px;
   text-decoration: none;
   color: #333;
   border-radius: 8px;
+  line-height: 1.2;
 }
-nav ul li a:hover {
+nav ul li > a:hover {
   background-color: #cdbba7;
   color: #fff;
 }
 
-/* 子選單（桌機） */
+/* 桌機：子選單（hover 展開） */
 nav ul li ul {
   display: none;
   position: absolute;
@@ -129,23 +173,20 @@ nav ul li ul {
   padding: 8px 0;
   border-radius: 10px;
   box-shadow: 0 10px 24px rgba(0,0,0,.12);
-  z-index: 10;
+  z-index: 20;
 }
 nav ul li:hover > ul { display: block; }
 
 nav ul li ul li {
   width: 100%;
-  float: none;
   display: block;
-  position: relative;
 }
 nav ul li ul li a {
   padding: 8px 16px;
   color: #333;
+  border-radius: 0;
 }
-nav ul li ul li a:hover {
-  background-color: #ddd;
-}
+nav ul li ul li a:hover { background-color: #ddd; }
 
 /* 舊的 .menu 樣式（若仍使用，保留） */
 .menu a {
@@ -162,62 +203,50 @@ nav ul li ul li a:hover {
   color: #ffffff;
 }
 
-/* ========== 漢堡按鈕（手機） ========== */
-.hamburger {
-  display: none;            /* 桌機隱藏 */
-  flex-direction: column;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  user-select: none;
-}
-.hamburger span {
-  height: 3px;
-  width: 26px;
-  background: #333;
-  margin: 4px 0;
-  border-radius: 2px;
-}
-
 /* ========== 手機版導覽（與 nav.js 配合） ========== */
 @media (max-width: 768px) {
-  /* 顯示漢堡 */
+  /* 顯示漢堡（手機起） */
   .hamburger { display: inline-flex; }
 
-  /* 手機：主選單預設收合，nav.open 時展開 */
+  /* 手機：主選單預設收合；.open 時展開 */
   nav#site-nav > ul,
   nav > ul {
     display: none;
     flex-direction: column;
+    align-items: stretch;
     width: 100%;
     gap: 0;
     background: #f9f9f9;
-    padding: 8px 0;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
   }
   nav#site-nav.open > ul,
-  nav.open > ul {
-    display: flex;
+  nav.open > ul { display: flex; }
+
+  /* 手機：主層連結（更好點） */
+  nav ul li > a {
+    padding: 12px 14px;
+    border-radius: 0;
   }
 
-  /* 子選單：手機預設收合，點父層 li.open 展開（由 JS 切 class） */
-  nav li ul {
-    display: none !important;      /* 避免桌機 hover 規則干擾 */
+  /* 手機：子選單預設關閉，由 JS 在 li 上加 .open 時展開 */
+  nav ul li ul {
+    display: none !important;      /* 覆寫桌機 hover */
     position: static !important;   /* 手機不浮出 */
     box-shadow: none !important;
     background: transparent;
-    padding: 0;
-    margin-left: 12px;             /* 次層縮排 */
+    padding: 0 0 6px 0;
+    margin: 0 0 0 12px;            /* 次層縮排 */
+    border-radius: 0;
   }
-  nav li.open > ul {
-    display: block !important;
-  }
+  nav li.open > ul { display: block !important; }
 
-  /* 手機上不要用 hover 展開 */
-  nav li:hover > ul { display: none; }
+  /* 禁用手機 hover 展開 */
+  nav ul li:hover > ul { display: none; }
 
-  /* 觸控更好點 */
-  nav a { padding: 12px 14px; }
+  /* sticky 疊層調整：手機上 nav 靠近頂部 */
+  nav#site-nav, nav { top: 0; }
 }
 
-/* ========== 小改善：可點區塊、更流暢 ========== */
+/* ========== 小改善：點擊體驗 ========== */
 nav a, .hamburger { -webkit-tap-highlight-color: transparent; }
