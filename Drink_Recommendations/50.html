@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>50嵐</title>
   <link rel="stylesheet" href="style (1)-page1-2.css" />
   <style>
-    /* 你原本頁面內的少量樣式（可留可移到 CSS 檔） */
+    /* 僅本頁用到的少量補強（其餘請放進你的全站 CSS） */
     body { background-image: url(images/y/bg.jpg); }
     hr.style-one {
       border: 0;
@@ -16,25 +16,57 @@
     }
     a { text-decoration: none; color: #73aa68; }
 
-    /* 建議保留的最小結構樣式（若已在總 CSS 內處理可刪） */
-    .nav-container{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:8px 16px;background:#fff
+    /* 導覽容器與漢堡按鈕（若已在全站 CSS 內定義可刪） */
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 16px;
+      background: #fff;
     }
-    .hamburger{display:none;flex-direction:column;cursor:pointer}
-    .hamburger span{height:3px;width:25px;background:#333;margin:4px 0;border-radius:2px}
-    @media (max-width:768px){
-      .hamburger{display:flex}
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #222;
+    }
+    .brand img { width: 28px; height: 28px; vertical-align: middle; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      width: 40px;
+      height: 36px;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+    }
+    .hamburger span {
+      height: 3px; width: 24px; background: #333; border-radius: 2px; display: block;
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 導覽容器 + 漢堡 -->
+  <!-- 導覽容器 + 漢堡按鈕 -->
   <div class="nav-container">
-    
-    <button class="hamburger" id="hamburger"
-            aria-label="開啟選單" aria-expanded="false" aria-controls="nav-list" type="button">
+    <a class="brand" href="Home.html" aria-label="回首頁">
+      <img src="images/menu.png" alt="" loading="lazy" />
+      <span>飲料地圖</span>
+    </a>
+
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -65,18 +97,18 @@
       <li>
         <a href="#">各店首頁</a>
         <ul>
-          <li><a href="https://macutea.com.tw/" loading="lazy" target="_blank" rel="noopener">麻古茶坊</a></li>
-          <li><a href="https://dejeng.com/" loading="lazy" target="_blank" rel="noopener">得正</a></li>
-          <li><a href="https://www.kebuke.com/" loading="lazy" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
-          <li><a href="https://guiji-group.com/" loading="lazy" target="_blank" rel="noopener">龜記</a></li>
-          <li><a href="http://50lan.com/web/news.asp" loading="lazy" target="_blank" rel="noopener">五十嵐</a></li>
-          <li><a href="https://www.teatop.com.tw/" loading="lazy" target="_blank" rel="noopener">台灣第一味</a></li>
-          <li><a href="https://tw.tp-tea.com/" loading="lazy" target="_blank" rel="noopener">茶湯會</a></li>
-          <li><a href="https://8yotea.com/" loading="lazy" target="_blank" rel="noopener">八曜和茶</a></li>
-          <li><a href="https://wanpotea.com/" loading="lazy" target="_blank" rel="noopener">萬波</a></li>
-          <li><a href="https://www.wootea.com/" loading="lazy" target="_blank" rel="noopener">五桐號</a></li>
-          <li><a href="https://www.aniceholiday.com.tw/" loading="lazy" target="_blank" rel="noopener">一沐日</a></li>
-          <li><a href="http://www.milkshoptea.com/index.php" loading="lazy" target="_blank" rel="noopener">迷克夏</a></li>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener" loading="lazy">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener" loading="lazy">得正</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener" loading="lazy">可不可熟成紅茶</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener" loading="lazy">龜記</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener" loading="lazy">五十嵐</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener" loading="lazy">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener" loading="lazy">茶湯會</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener" loading="lazy">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener" loading="lazy">萬波</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener" loading="lazy">五桐號</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener" loading="lazy">一沐日</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener" loading="lazy">迷克夏</a></li>
         </ul>
       </li>
     </ul>
@@ -84,12 +116,12 @@
 
   <!-- 頁首 LOGO -->
   <header class="header">
-    <a href="http://50lan.com/web/news.asp" aria-label="前往 50嵐官方網站（新分頁開啟）" target="_blank" rel="noopener">
+    <a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener" aria-label="前往 50嵐官方網站（新分頁）">
       <img src="images/50/50.gif" alt="50嵐官方標誌" loading="lazy" />
     </a>
   </header>
 
-  <!-- 產品卡片 -->
+  <!-- 產品清單 -->
   <main>
     <div class="container">
       <div class="item">
@@ -114,7 +146,7 @@
       </div>
       <div class="item">
         <a href="50_page2_5.html">
-          <img src="images/50/50 ice.jpg" alt="50嵐 冰系列" loading="lazy" />
+          <img src="images/50/50 ice.jpg" alt="50嵐 冰沙/冰飲系列" loading="lazy" />
         </a>
       </div>
       <div class="item">
@@ -141,8 +173,7 @@
     </address>
   </footer>
 
-  <!-- 共用 JS：控制漢堡按鈕與子選單 -->
+  <!-- 共用 JS（整合：漢堡選單 + 輪播；若本頁無輪播則只會啟用漢堡選單） -->
   <script src="nav.js"></script>
 </body>
 </html>
-
