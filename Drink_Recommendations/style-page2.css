@@ -8,33 +8,51 @@ html, body {
   background: #fff;
 }
 
-/* ========== Global img（維持你原本 300x300） ========== */
+/* ========== Global img（維持原本比例） ========== */
 img {
-  height: 300px;
-  width: 300px;
   display: block;
-}
-
-/* ========== Layout（你的圖片＋文字區） ========== */
-body { margin: 0; padding: 0; }
-
-.image {
-  flex: 1;
-  padding: 20px;
-  margin-left: 180px;   /* 調整中線跟照片的距離 */
-  margin-right: 150px;  /* 調整中線跟字的距離 */
-  margin-top: 60px;
-}
-.image img {
   max-width: 100%;
   height: auto;
 }
 
-.text {
-  flex: 1;
-  padding: 100px 95px;  /* 調整中線長度 */
-  margin-left: -320px;  /* 調整中線跟照片的距離 */
-  border-left: 1px solid #ccc;
+/* ========== Container (圖片上＋分隔線＋文字下) ========== */
+.container {
+  display: flex;
+  flex-direction: column;   /* 垂直排列 */
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: rgba(255, 236, 168); /* 背景黃色 */
+  border-radius: 40px;
+}
+
+/* 圖片區 */
+.container .image {
+  margin: 0;
+  padding: 0;
+}
+.container .image img {
+  border-radius: 12px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 分隔線 */
+.container .divider {
+  width: 80%;
+  border: 0;
+  height: 2px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+/* 文字區 */
+.container .text {
+  text-align: left;
+  padding: 0 20px;
+}
+.container .text h2 {
+  margin-top: 0;
 }
 
 /* ========== Footer ========== */
@@ -50,36 +68,12 @@ body { margin: 0; padding: 0; }
   height: 50px;
 }
 
-/* ========== 舊 menu 類別（若還在用就保留） ========== */
-.menu a {
-  display: block;
-  padding: 0 30px;
-  background-color: #fff;
-  color: #333333;
-  text-decoration: none;
-  line-height: 40px;
-}
-.menu a:hover,
-.menu li:hover > a {
-  background-color: #cdbba7;
-  color: #ffffff;
-}
-
-/* =================================================================
-   導覽列（桌機＋行動版）
-   結構建議：
-   <div class="nav-container">
-     <a class="brand" href="Home.html"><img ...></a>
-     <button id="hamburger" class="hamburger" aria-controls="nav-list" aria-expanded="false">...</button>
-   </div>
-   <nav id="site-nav"><ul id="nav-list"> ... </ul></nav>
-   ================================================================= */
-
+/* ========== 導覽列（桌機＋行動版） ========== */
 /* 置頂容器（品牌＋漢堡） */
 .nav-container {
   position: sticky;
   top: 0;
-  z-index: 10001; /* 高於 nav */
+  z-index: 10001;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,9 +93,9 @@ body { margin: 0; padding: 0; }
 }
 .brand img { width: 28px; height: 28px; vertical-align: middle; }
 
-/* 漢堡按鈕（桌機隱藏，手機顯示） */
+/* 漢堡按鈕 */
 .hamburger {
-  display: none;              /* 桌機隱藏 */
+  display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
@@ -111,7 +105,7 @@ body { margin: 0; padding: 0; }
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fff;
-  z-index: 10002;             /* 確保能點到 */
+  z-index: 10002;
   -webkit-tap-highlight-color: transparent;
 }
 .hamburger span {
@@ -122,22 +116,19 @@ body { margin: 0; padding: 0; }
   display: block;
   margin: 0 auto;
 }
-/*（可選）點開時做 X 動畫，需要搭配 JS 切 .active */
 .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 .hamburger span { transition: transform .2s ease, opacity .2s ease; }
 
-/* nav 本體（桌機） */
+/* 桌機 nav */
 nav#site-nav, nav {
   background: #fff;
   position: sticky;
-  top: 56px;                  /* 與 .nav-container 高度錯開 */
+  top: 56px;
   z-index: 10000;
   border-bottom: 1px solid #eee;
 }
-
-/* 桌機：主選單水平排列 */
 nav > ul,
 nav#site-nav > ul {
   display: flex;
@@ -147,8 +138,6 @@ nav#site-nav > ul {
   margin: 0;
   padding: 8px 16px;
 }
-
-/* 桌機：選單項目＋連結 */
 nav ul li { position: relative; }
 nav ul li > a {
   display: block;
@@ -162,8 +151,6 @@ nav ul li > a:hover {
   background-color: #cdbba7;
   color: #fff;
 }
-
-/* 桌機：子選單（hover 展開） */
 nav ul li ul {
   display: none;
   position: absolute;
@@ -178,22 +165,13 @@ nav ul li ul {
 }
 nav ul li:hover > ul { display: block; }
 nav ul li ul li { width: 100%; display: block; }
-nav ul li ul li a {
-  padding: 8px 16px;
-  color: #333;
-  border-radius: 0;
-}
+nav ul li ul li a { padding: 8px 16px; color: #333; border-radius: 0; }
 nav ul li ul li a:hover { background-color: #ddd; }
 
-/* ========== 行動版規則（要配合 nav.js） ========== */
+/* 手機版 nav */
 @media (max-width: 768px) {
-  /* 顯示漢堡 */
   .hamburger { display: inline-flex; }
-
-  /* 行動版：nav 頂到最上面（與 nav-container 合併） */
   nav#site-nav, nav { top: 0; }
-
-  /* 主選單預設收合；.open 時展開 */
   nav#site-nav > ul,
   nav > ul {
     display: none;
@@ -209,51 +187,22 @@ nav ul li ul li a:hover { background-color: #ddd; }
   nav.open > ul {
     display: flex;
   }
-
-  /* 主層連結（更好點） */
   nav ul li > a {
     padding: 12px 14px;
     border-radius: 0;
   }
-
-  /* 子選單：手機預設關閉，點父層 li.open 展開（由 JS 控制 class） */
   nav ul li ul {
-    display: none !important;      /* 覆寫桌機 hover */
-    position: static !important;   /* 手機不浮出 */
+    display: none !important;
+    position: static !important;
     box-shadow: none !important;
     background: transparent;
     padding: 0 0 6px 0;
-    margin: 0 0 0 12px;            /* 次層縮排 */
+    margin: 0 0 0 12px;
     border-radius: 0;
   }
   nav li.open > ul { display: block !important; }
-
-  /* 禁用手機 hover 展開 */
   nav ul li:hover > ul { display: none; }
 }
 
-/* 讓點擊更舒服（移除藍色高亮） */
+/* 點擊無藍色高亮 */
 nav a, .hamburger { -webkit-tap-highlight-color: transparent; }
-
-/* ========== 你原本的 nav 基礎（相容舊寫法；桌機有效） ========== */
-nav ul { list-style: none; margin: 0; padding: 0; }
-nav ul li { display: inline-block; position: relative; }
-nav ul li a { display: block; padding: 10px 20px; text-decoration: none; color: #333; }
-/* 這段舊 hover 子選單只在桌機有作用，手機已被上面的 @media 覆寫 */
-nav ul li ul {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #f9f9f9;
-  padding: 0;
-}
-nav ul li:hover > ul { display: block; }
-nav ul li ul li {
-  width: 200px;
-  float: none;
-  display: list-item;
-  position: relative;
-}
-nav ul li ul li a { padding: 8px 16px; color: #333; }
-nav ul li ul li a:hover { background-color: #ddd; }
