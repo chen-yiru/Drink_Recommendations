@@ -1,43 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>50嵐-烏龍瑪奇朵</title>
-    <link rel="stylesheet" href="style-page2.css">
-</head>
-<style>
-    .container {
-      position: relative;
-      display: flex;
-      align-items: center;
-      margin: 20px;
-      padding: 10px;
-      background-color: rgb(255,236,168);
-      /*調整背景顏色*/
-      border-radius: 40px;
-      z-index: -1;
-      width: auto;
-      height: 500px;
-    }
-    .image {
-        flex: 1;
-        padding: 20px;
-        margin-left: 100px;
-        /*調整中線跟照片的距離*/
-        margin-right: 150px;
-        /*調整中線跟字的距離*/
-        margin-top: 20px;
-    }
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>50嵐－烏龍瑪奇朵</title>
+
+  <!-- 套用你的共用樣式（已含：圖片上／分隔線／文字下＋漢堡選單） -->
+  <link rel="stylesheet" href="style-page2.css" />
+  <style>
+    /* 本頁小補：限制卡片最大寬並置中（可視需要保留/移除） */
+    .container { max-width: 1200px; margin: 24px auto; }
   </style>
+</head>
 <body>
-</a>
-<header>
-  <nav>
-    <ul>
+
+  <!-- 置頂導覽容器（品牌＋漢堡） -->
+  <div class="nav-container">
+    <a class="brand" href="Home.html" aria-label="回首頁">
+      
+    </a>
+
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- 主選單（支援手機漢堡展開） -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
       <li><a href="Home.html">首頁</a></li>
-      <li><a href="#">各店菜單</a>
+
+      <li>
+        <a href="#">各店菜單</a>
         <ul>
           <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
           <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
@@ -53,44 +52,60 @@
           <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
         </ul>
       </li>
-      <li><a href="#">各店首頁</a>
+
+      <li>
+        <a href="#">各店首頁</a>
         <ul>
-          <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-          <li><a href="https://dejeng.com/">得正</a></li>
-          <li><a href="https://8yotea.com/">八曜和茶</a></li>
-          <li><a href="https://wanpotea.com/">萬波</a></li>
-          <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-          <li><a href="http://www.milkshoptea.com/index.php">迷客夏</a></li>
-          <li><a href="https://guiji-group.com/">龜記</a></li>
-          <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-          <li><a href="https://www.wootea.com/">五桐號</a></li>
-          <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-          <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-          <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener">得正</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener">萬波</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener">五十嵐</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener">迷客夏</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener">龜記</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener">一沐日</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener">五桐號</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener">茶湯會</a></li>
         </ul>
       </li>
-    
     </ul>
   </nav>
-</header>
 
+  <!-- 內容標題 -->
+  <header class="header" style="text-align:center; padding:16px 0;">
+    <h1 style="margin:0; font-size:22px;">烏龍瑪奇朵</h1>
+  </header>
 
-<div class="container">
+  <!-- 主要卡片：圖片在上／分隔線／文字在下 -->
+  <main>
+    <div class="container">
+      <!-- 圖片 -->
+      <div class="image">
+        <img src="images/50/50烏龍.jpg" alt="烏龍瑪奇朵" loading="lazy" />
+      </div>
 
+      <!-- 分隔線 -->
+      <hr class="divider" />
 
+      <!-- 文字敘述 -->
+      <div class="text">
+        <h2>烏龍瑪奇朵</h2>
+        <p>
+          50嵐的瑪奇朵選用鮮奶油製作奶蓋，風味相對偏甜。如果你喝膩了常見的鹹奶蓋，
+          可以試試看這杯烏龍瑪奇朵！濃郁的奶油香氣入口即化，不小心就一口接一口～
+        </p>
+      </div>
+    </div>
+  </main>
 
-  <div class="image">
-    <img src="images/50/50烏龍.jpg" alt="烏龍瑪奇朵">
-  </div>
-  <div class="text">
-    <h2>烏龍瑪奇朵</h2>
-    <p>50嵐的瑪奇朵是選用鮮奶油去做奶蓋，所以50嵐的奶蓋是相對偏甜的風味，如果你吃膩了平常常見的鹹奶蓋的話，可以改喝喝看50嵐的烏龍瑪奇朵喔！ 濃郁的奶油香氣，入口後，直接在嘴裡化開來，一不小心就把整杯喝完了!</p>
-  </div>
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <p>僅學校繳交報告使用</p>
+  </footer>
 
-
-</div>
-<footer class="footer">
-  <p>僅學校繳交報告使用</p>
-</footer>
+  <!-- 共用 JS（漢堡選單；若頁面無輪播只會啟用選單） -->
+  <script src="nav.js"></script>
 </body>
 </html>
