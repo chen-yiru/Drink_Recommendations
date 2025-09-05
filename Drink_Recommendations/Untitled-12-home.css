@@ -9,260 +9,183 @@ html, body {
   color: #222;
   background: #fff;
 }
+img { max-width: 100%; height: auto; display: block; }
 
-header {
-  width: 100%;
-  position: relative;
-  margin: 0 auto;
+/* 系統名稱 */
+.system-title{
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin: 20px 16px;
+  font-size: clamp(20px, 2.4vw, 32px);
 }
 
-footer {
-  height: 100px;
-  text-align: center;
-  background-color: blanchedalmond;
-  line-height: 100px;
-  font-size: 14px;
+/* 版心容器（可套在需要置中的區塊） */
+.container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding-inline: clamp(12px, 3vw, 24px);
 }
 
 /* ===============================
-   Nav (Dropdown)
+   Nav（桌機 + 手機）
 ================================ */
-nav ul {
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+.nav-inner{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 10px clamp(12px, 3vw, 24px);
+}
+.nav-brand{ display:none; } /* 需要可顯示你的 Logo/文字 */
+
+.nav-toggle{
+  display: none;
+  background: #eee;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 16px;
+}
+
+nav ul{
   list-style: none;
   margin: 0;
-  padding: 0 16px;
+  padding: 0;
 }
-nav ul li {
-  display: inline-block;
+nav > ul{
+  display: flex;
+  gap: 4px;
+  padding: 0 clamp(12px, 3vw, 24px) 10px;
+}
+nav li{
   position: relative;
 }
-nav ul li a {
+nav a{
   display: block;
-  padding: 10px 16px;
+  padding: 10px 14px;
   text-decoration: none;
   color: #333;
   border-radius: 8px;
+  white-space: nowrap;
 }
-nav ul li a:hover {
-  background: #cdbba7;
-  color: #fff;
-}
-nav ul li ul {
+nav a:hover{ background: #cdbba7; color:#fff; }
+
+/* 下拉 */
+nav li ul{
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 6px);
   left: 0;
-  min-width: 200px;
-  background-color: #f9f9f9;
-  padding: 8px 0;
+  min-width: 220px;
   border-radius: 10px;
+  background: #fff;
   box-shadow: 0 10px 24px rgba(0,0,0,.12);
-  z-index: 999;
+  padding: 8px 0;
 }
-nav ul li:hover > ul { display: block; }
-nav ul li ul li { display: block; }
-nav ul li ul li a { padding: 8px 16px; color: #333; }
-nav ul li ul li a:hover { background: #ddd; }
+nav li:hover > ul{ display:block; } /* 桌機 hover */
+
+/* 手機樣式 */
+@media (max-width: 768px){
+  .nav-toggle{ display: inline-flex; align-items:center; gap:8px; }
+  nav > ul{ display: none; flex-direction: column; gap: 0; padding: 0 12px 12px; }
+  nav.open > ul{ display: flex; }
+  nav li ul{ position: static; display: none; box-shadow: none; padding: 0; }
+  nav li.open > ul{ display: block; } /* 手機點擊展開子選單 */
+  nav a{ padding: 12px; border-radius: 8px; }
+}
 
 /* ===============================
    Slideshow
 ================================ */
-.slideshow-container {
-  width: 100%;
+.slideshow-container{
   position: relative;
-  margin: 0 auto;
-  z-index: 1;
-}
-.mySlides { display: none; }
-.mySlides img {
-  display: block;
   width: 100%;
-  height: auto;
+  margin: 0 auto 10px;
+}
+.mySlides{ display:none; }
+.mySlides img{
+  width:100%;
+  height:auto;
   object-fit: cover;
 }
-.text {
-  color: #f2f2f2;
-  font-size: 1.1rem;
-  padding: 24px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-  text-shadow: 0 2px 6px rgba(0,0,0,.25);
-}
-
-/* arrows */
-.prev, .next {
+.prev, .next{
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  padding: 12px 14px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 10px;
-  user-select: none;
+  inset: 50% auto auto 8px;   /* top:50%; left:8px */
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.28);
-  transition: background-color .25s ease, opacity .25s ease;
+  background: rgba(0,0,0,.35);
+  color:#fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  user-select: none;
 }
-.prev { left: 8px; }
-.next { right: 8px; }
-.prev:hover, .next:hover { background: rgba(0,0,0,0.45); }
-
-/* dots */
-.dots { text-align: center; }
-.dot {
-  cursor: pointer;
-  height: 12px;
-  width: 12px;
-  margin: 12px 5px 20px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color .25s ease, transform .15s ease;
+.next{ left: auto; right: 8px; }
+.prev:hover, .next:hover{ background: rgba(0,0,0,.55); }
+.dots{ text-align:center; padding: 8px 0 14px; }
+.dot{
+  display:inline-block; width:10px; height:10px; border-radius:50%;
+  background:#bbb; margin:0 4px; cursor:pointer; transition:transform .15s;
 }
-.active, .dot:hover { background-color: #666; transform: scale(1.06); }
-
-/* fade animation */
-.fade { animation: fade 1.2s; }
-@keyframes fade {
-  from { opacity: .4; }
-  to   { opacity: 1;  }
-}
+.active, .dot:hover{ background:#666; transform: scale(1.08); }
 
 /* ===============================
-   Cards Grid (centered)
+   Cards Grid
 ================================ */
-.card-deck {
-  max-width: 1200px;
+.card-deck{
+  width: min(1200px, 100%);
   margin: 24px auto;
-  padding: 0 24px;
-  display: grid !important;
+  padding-inline: clamp(12px, 3vw, 24px);
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  justify-items: center;
-  align-items: start;
+  gap: clamp(12px, 3vw, 24px);
 }
+.card{
+  background:#fff; border-radius:16px; overflow:hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  transition: transform .2s, box-shadow .2s;
+  text-align:center;
+}
+.card:hover{ transform: translateY(-4px); box-shadow:0 10px 28px rgba(0,0,0,.12); }
+.card > a{ display:flex; flex-direction:column; color:inherit; text-decoration:none; min-height:100%; }
 
-/* card container */
-.card {
-  width: 100%;
-  max-width: 320px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  transition: transform .2s ease, box-shadow .2s ease;
-  overflow: hidden;
-  text-align: center;
-  margin: 0;
+.image-container{
   position: relative;
+  aspect-ratio: 1 / 1;          /* 正方形視窗，避免高度跳動 */
+  display:flex; align-items:center; justify-content:center;
+  padding: 14px;
 }
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-}
-.card > a {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  color: inherit;
-  text-decoration: none;
-  position: relative;
-  z-index: 2;
+.image-container img{ max-width: 200px; width: 100%; height:auto; transition:opacity .25s; }
+.image-container img:first-child{ position: relative; z-index:1; }
+.hover-image{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  opacity:0; pointer-events:none; transition:opacity .25s;
 }
 
-/* image box */
-.image-container {
-  position: relative;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-.image-container img {
-  display: block;
-  max-width: 200px;
-  width: 100%;
-  height: auto;
-  transition: opacity .25s ease;
-}
-.image-container img:first-child {
-  position: relative;
-  z-index: 1;
-}
-.hover-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 200px;
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  transition: opacity .25s ease;
-  pointer-events: none; /* 不攔截滑鼠 */
-}
-.card:hover .hover-image {
-  opacity: 1; /* 顯示 hover 圖 */
-}
-.card:hover .image-container img:first-child {
-  opacity: 0; /* 隱藏原始圖 */
+/* 只在支援 hover 的裝置做切換（觸控裝置不啟動） */
+@media (hover: hover){
+  .card:hover .hover-image{ opacity:1; }
+  .card:hover .image-container img:first-child{ opacity:0; }
 }
 
-/* card text */
-.card-body { padding: 16px 20px 20px; }
-.card-title { margin: 0; font-size: 18px; font-weight: 700; }
-
-/* optional overlay */
-.card-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  opacity: 0;
-  transition: opacity .25s;
-  z-index: 1;
-}
-.card:hover .card-overlay { opacity: 1; }
-
-/* info layer */
-.info {
-  opacity: 0;
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0,0,0,.3);
-  text-align: center;
-  padding-top: 40px;
-  color: #fff;
-  transition: opacity .3s;
-  border-radius: 12px;
-  z-index: 1;
-}
-.card:hover .info { opacity: 1; }
-
-/* 系統名稱區塊 */
-.system-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 800;
-  margin: 20px 0;       /* 上下留白 */
-  color: #111;
-}
-
+.card-body{ padding: 14px 16px 18px; }
+.card-title{ margin:0; font-weight:700; font-size: clamp(16px, 2vw, 18px); }
 
 /* ===============================
-   Responsive
+   Footer
 ================================ */
-@media (max-width: 992px) {
-  .image-container { height: 200px; }
-  .card-title { font-size: 17px; }
+footer{
+  text-align:center; padding: 26px 12px; background: #f7f4ef; color:#444;
 }
-@media (max-width: 600px) {
-  nav ul { padding: 0 8px; }
-  nav ul li a { padding: 10px 12px; }
-  .image-container { height: 180px; }
-  .card-title { font-size: 16px; }
-  .card-deck { gap: 16px; padding: 0 16px; }
-  .prev, .next { font-size: 16px; padding: 10px 12px; }
+
+/* 微調箭頭與文字在小螢幕 */
+@media (max-width: 480px){
+  .prev, .next{ padding: 8px 10px; }
 }
