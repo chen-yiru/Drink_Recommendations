@@ -71,7 +71,7 @@ footer {
 }
 
 /* =========================================================
-   導覽列（nav）— 桌機預設、手機以 @media 覆寫
+   導覽列（nav）
    結構：.nav-container（含品牌與 .hamburger） + <nav id="site-nav"><ul>...</ul></nav>
    ========================================================= */
 
@@ -79,7 +79,7 @@ footer {
 .nav-container {
   position: sticky;
   top: 0;
-  z-index: 10001;                /* 高於 nav 本體 */
+  z-index: 10010;                /* 高於 nav 本體，確保看得到漢堡 */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,7 +113,7 @@ footer {
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fff;
-  z-index: 10002;                /* 再高一層，確保能點到 */
+  z-index: 10020;                /* 再高一層，確保能點到 */
   -webkit-tap-highlight-color: transparent;
 }
 .hamburger span {
@@ -125,17 +125,16 @@ footer {
   margin: 0 auto;
 }
 
-/* 主 nav 區塊 */
-nav#site-nav, nav {
+/* 主 nav 區塊（只鎖定 #site-nav，避免其他 nav 被影響） */
+nav#site-nav {
   background: #fff;
   position: sticky;
-  top: 56px;                     /* 與 .nav-container 高度錯開，避免重疊 */
-  z-index: 10000;
+  top: 0;                        /* 跟 .nav-container 緊貼 */
+  z-index: 10005;
   border-bottom: 1px solid #eee;
 }
 
 /* 桌機：主選單水平排列 */
-nav > ul,
 nav#site-nav > ul {
   display: flex;
   align-items: center;
@@ -146,10 +145,10 @@ nav#site-nav > ul {
 }
 
 /* 桌機：選單項目 */
-nav ul li {
+nav#site-nav ul li {
   position: relative;
 }
-nav ul li > a {
+nav#site-nav ul li > a {
   display: block;
   padding: 10px 16px;
   text-decoration: none;
@@ -157,13 +156,13 @@ nav ul li > a {
   border-radius: 8px;
   line-height: 1.2;
 }
-nav ul li > a:hover {
+nav#site-nav ul li > a:hover {
   background-color: #cdbba7;
   color: #fff;
 }
 
 /* 桌機：子選單（hover 展開） */
-nav ul li ul {
+nav#site-nav ul li ul {
   display: none;
   position: absolute;
   top: calc(100% + 6px);
@@ -175,18 +174,18 @@ nav ul li ul {
   box-shadow: 0 10px 24px rgba(0,0,0,.12);
   z-index: 20;
 }
-nav ul li:hover > ul { display: block; }
+nav#site-nav ul li:hover > ul { display: block; }
 
-nav ul li ul li {
+nav#site-nav ul li ul li {
   width: 100%;
   display: block;
 }
-nav ul li ul li a {
+nav#site-nav ul li ul li a {
   padding: 8px 16px;
   color: #333;
   border-radius: 0;
 }
-nav ul li ul li a:hover { background-color: #ddd; }
+nav#site-nav ul li ul li a:hover { background-color: #ddd; }
 
 /* 舊的 .menu 樣式（若仍使用，保留） */
 .menu a {
@@ -208,10 +207,9 @@ nav ul li ul li a:hover { background-color: #ddd; }
   /* 顯示漢堡（手機起） */
   .hamburger { display: inline-flex; }
 
-  /* 手機：主選單預設收合；.open 時展開 */
-  nav#site-nav > ul,
-  nav > ul {
-    display: none;
+  /* 手機：主選單預設收合；.open 時展開（強制覆寫任何舊規則） */
+  nav#site-nav > ul {
+    display: none !important;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
@@ -219,34 +217,36 @@ nav ul li ul li a:hover { background-color: #ddd; }
     background: #f9f9f9;
     padding: 6px 0;
     border-bottom: 1px solid #eee;
+    position: relative;
+    z-index: 10005;
   }
-  nav#site-nav.open > ul,
-  nav.open > ul { display: flex; }
+  nav#site-nav.open > ul { display: flex !important; }
 
   /* 手機：主層連結（更好點） */
-  nav ul li > a {
+  nav#site-nav ul li > a {
     padding: 12px 14px;
     border-radius: 0;
   }
 
   /* 手機：子選單預設關閉，由 JS 在 li 上加 .open 時展開 */
-  nav ul li ul {
+  nav#site-nav ul li ul {
     display: none !important;      /* 覆寫桌機 hover */
     position: static !important;   /* 手機不浮出 */
     box-shadow: none !important;
-    background: transparent;
+    background: transparent !important;
     padding: 0 0 6px 0;
     margin: 0 0 0 12px;            /* 次層縮排 */
     border-radius: 0;
   }
-  nav li.open > ul { display: block !important; }
+  nav#site-nav li.open > ul { display: block !important; }
 
   /* 禁用手機 hover 展開 */
-  nav ul li:hover > ul { display: none; }
+  nav#site-nav ul li:hover > ul { display: none !important; }
 
-  /* sticky 疊層調整：手機上 nav 靠近頂部 */
-  nav#site-nav, nav { top: 0; }
+  /* sticky 疊層調整：手機上 nav 靠近頂部且蓋在內容上方 */
+  nav#site-nav { top: 0; z-index: 10005; }
 }
 
 /* ========== 小改善：點擊體驗 ========== */
-nav a, .hamburger { -webkit-tap-highlight-color: transparent; }
+nav#site-nav a,
+.hamburger { -webkit-tap-highlight-color: transparent; }
