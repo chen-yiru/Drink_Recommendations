@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>50嵐－8冰綠</title>
+  <title>50嵐－冰淇淋紅茶</title>
 
-  <!-- 共用樣式（請確認這個檔案路徑正確存在） -->
+  <!-- 套用共用樣式（含：圖片上／分隔線／文字下＋漢堡選單） -->
   <link rel="stylesheet" href="style-page2.css" />
+
+  <!-- 本頁少量補強（可留可刪） -->
   <style>
-    /* 本頁小補：限制卡片最大寬度並置中 */
+    /* 置中卡片並限制最大寬度 */
     .container { max-width: 1200px; margin: 24px auto; }
   </style>
 </head>
@@ -28,10 +30,11 @@
     </button>
   </div>
 
-  <!-- 主選單 -->
+  <!-- 主選單（支援手機漢堡展開） -->
   <nav id="site-nav" aria-label="主選單">
     <ul id="nav-list">
       <li><a href="Home.html">首頁</a></li>
+
       <li>
         <a href="#">各店菜單</a>
         <ul>
@@ -49,6 +52,7 @@
           <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
         </ul>
       </li>
+
       <li>
         <a href="#">各店首頁</a>
         <ul>
@@ -69,29 +73,26 @@
     </ul>
   </nav>
 
-  <!-- 內容 -->
-  <header class="header" style="text-align:center; padding:16px 0;">
-    <h1 style="margin:0; font-size:22px;">8冰綠</h1>
-  </header>
+  <!-- 內容標題 -->
+
 
   <!-- 主要卡片：圖片在上／分隔線／文字在下 -->
   <main>
     <div class="container">
-      <!-- 圖片（請確定檔名與路徑存在；此處用建議的英文檔名） -->
+      <!-- 圖片 -->
       <div class="image">
-        <img src="images/50/50-8binglv.jpg" alt="8冰綠" loading="lazy" />
+        <img src="images/50/50 ice.jpg" alt="冰淇淋紅茶" loading="lazy">
       </div>
 
-      <!-- 分隔線 -->
-      <hr class="divider" />
+      <!-- 分隔線（由 style-page2.css 的 .divider 控制） -->
+      <hr class="divider">
 
       <!-- 文字敘述 -->
       <div class="text">
-        <h2>8冰綠</h2>
+        <h2>冰淇淋紅茶</h2>
         <p>
-          用金桔汁＋梅子汁＋綠茶結合而成；因為杯子裡會放一顆金桔一顆梅子，合起來就像「8」，因此得名「8冰綠」。<br><br>
-          像金桔、檸檬、葡萄柚等，50嵐都堅持使用新鮮水果榨汁，絕不用濃縮還原果汁。酸甜清爽，搭配綠茶的清香，
-          是夏日消暑的最佳選擇！
+          在紅茶裡加入一球香草冰淇淋，邊喝時冰淇淋會慢慢融化，與紅茶交融成為甜而不膩的風味，
+          讓人回味無窮！如果你是螞蟻人，也可以另外加購幾球冰淇淋，絕對會愛不釋手。
         </p>
       </div>
     </div>
@@ -102,7 +103,7 @@
     <p>僅學校繳交報告使用</p>
   </footer>
 
-  <!-- 共用 JS（確保 nav.js 檔案存在且路徑正確） -->
+  <!-- 共用 JS（漢堡選單） -->
   <script src="nav.js"></script>
 </body>
 </html>
