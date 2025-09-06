@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>八曜和茶－雪匠奶茶</title>
 
-  <!-- 共用樣式（含：圖片上／分隔線／文字下＋漢堡選單） -->
+  <!-- 共用樣式（已支援：圖片上／分隔線／文字下＋右側抽屜漢堡選單） -->
   <link rel="stylesheet" href="style-page2.css" />
 
-  <!-- 本頁少量補強：背景色、白字、置中卡片寬度 -->
+  <!-- 本頁少量補強 -->
   <style>
     .container {
       max-width: 1200px;
@@ -19,14 +19,12 @@
       padding: 12px;
     }
     .text { color: #fff; }
-    /* 確保圖片滿版等比縮放 */
     .image img {
       display: block;
       width: 100%;
       height: auto;
       border-radius: 16px;
     }
-    /* 小螢幕排版友善 */
     @media (max-width: 768px) {
       .container { margin: 16px 12px; }
     }
@@ -37,7 +35,6 @@
   <!-- 置頂導覽容器（品牌＋漢堡） -->
   <div class="nav-container">
 
-
     <button id="hamburger" class="hamburger"
             type="button"
             aria-label="開啟選單"
@@ -47,7 +44,7 @@
     </button>
   </div>
 
-  <!-- 主選單（支援手機漢堡展開） -->
+  <!-- 主選單（支援手機漢堡展開；nav.js 會處理開闔與右側滑出） -->
   <nav id="site-nav" aria-label="主選單">
     <ul id="nav-list">
       <li><a href="Home.html">首頁</a></li>
@@ -88,8 +85,6 @@
     </ul>
   </nav>
 
-  <!-- 內容標題 -->
-
   <!-- 主要卡片：圖片在上／分隔線／文字在下 -->
   <main>
     <div class="container">
@@ -98,7 +93,7 @@
         <img src="images/images/83.jpg" alt="八曜和茶－雪匠奶茶" loading="lazy" />
       </div>
 
-      <!-- 分隔線（若 style-page2.css 已有 .divider，這裡直接使用） -->
+      <!-- 分隔線 -->
       <hr class="divider" />
 
       <!-- 文字敘述 -->
@@ -118,7 +113,7 @@
     <p>僅學校繳交報告使用</p>
   </footer>
 
-  <!-- 共用 JS（漢堡選單） -->
+  <!-- 共用 JS（整合：漢堡選單 + 輪播；本頁無輪播則只會啟用選單） -->
   <script src="nav.js"></script>
 </body>
 </html>
