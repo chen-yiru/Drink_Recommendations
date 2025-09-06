@@ -30,15 +30,6 @@
     @media (max-width: 768px){
       .container { margin: 16px 12px; padding: 12px; }
     }
-
-    /* 漢堡與品牌列的最基礎樣式（若已在 style-page2.css 內有定義，可省略） */
-    .nav-container {
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 1200px; margin: 0 auto; padding: 12px 16px;
-    }
-    .brand { text-decoration: none; font-weight: 600; color: #222; }
-    .hamburger { background: none; border: 0; cursor: pointer; width: 40px; height: 32px; }
-    .hamburger span { display: block; height: 3px; margin: 6px 0; background: #222; }
   </style>
 </head>
 <body>
@@ -55,7 +46,7 @@
     </button>
   </div>
 
-  <!-- 主選單（支援手機漢堡展開） -->
+  <!-- 主選單（支援手機漢堡展開；nav.js 會處理開闔） -->
   <nav id="site-nav" aria-label="主選單">
     <ul id="nav-list">
       <li><a href="Home.html">首頁</a></li>
