@@ -91,8 +91,8 @@ img {
 
 /* 置頂容器（品牌＋漢堡） */
 .nav-container {
-  position: static;
-  top: auto;
+  position: sticky;     /* 讓頂部導覽跟著頁面吸附 */
+  top: 0;
   z-index: 10001;
   display: flex;
   justify-content: space-between;
@@ -147,8 +147,8 @@ img {
 nav#site-nav,
 nav {
   background: #fff;
-  position: static;
-  top: auto;
+  position: sticky;   /* 讓 nav 紧貼 nav-container 之下 */
+  top: 0;
   z-index: 10000;
   border-bottom: 1px solid #eee;
 }
@@ -197,82 +197,46 @@ nav ul li ul li a {
 }
 nav ul li ul li a:hover { background-color: #ddd; }
 
-/* ========== 手機版導覽（右側抽屜；配合 nav.js） ========== */
+/* ========== 手機版導覽（下拉式；配合 nav.js 切換 .open） ========== */
 @media (max-width: 768px) {
-  /* 讓內容不會頂到固定在右上的漢堡 */
-  body {
-    padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
-  }
+  /* 顯示漢堡 */
+  .hamburger { display: inline-flex; }
 
-  /* 顯示漢堡：固定右上，考量 iPhone 安全區 */
-  .hamburger {
-    display: inline-flex;
-    position: fixed;
-    top: calc(env(safe-area-inset-top, 0px) + 12px);
-    right: calc(env(safe-area-inset-right, 0px) + 16px);
-  }
-
-  /* 讓品牌列在手機滾動時不被內容覆蓋 */
-  .nav-container{
-    position: sticky;
-    top: 0;
-    background: #fff;
-    z-index: 1001;
-  }
-
-  /* 抽屜容器：預設藏在右側；.active/.open 時滑出 */
-  nav#site-nav {
-    position: fixed !important;
-    top: 0;
-    right: -260px;
-    width: 260px;
-    height: 100dvh;
-    background: #f9f9f9;
-    box-shadow: -12px 0 24px rgba(0,0,0,.18);
-    transition: right .3s ease;
-    z-index: 1000;
-    padding-top: calc(env(safe-area-inset-top, 0px) + 60px);
-    border-bottom: 0;
-  }
-  nav#site-nav.active,
-  nav#site-nav.open { right: 0; }
-
-  /* 抽屜內部清單 */
+  /* 手機：主選單預設收合；.open 時展開（下拉在導覽列下方） */
   nav#site-nav > ul {
-    display: flex !important;
+    display: none !important;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
     gap: 0;
-    background: transparent;
-    padding: 6px 0 12px;
-    margin: 0;
-    border-bottom: 0;
+    background: #f9f9f9;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    z-index: 10005;
   }
+  nav#site-nav.open > ul { display: flex !important; }
 
   /* 主層連結（更好點） */
-  nav ul li > a {
-    padding: 12px 16px;
+  nav#site-nav ul li > a {
+    padding: 12px 14px;
     border-radius: 0;
   }
 
-  /* 子選單在手機改為內縮展開 */
-  nav ul li ul {
-    display: none !important;
-    position: static !important;
+  /* 子選單在手機改為內縮展開（由 JS 在 li 加 .open） */
+  nav#site-nav ul li ul {
+    display: none !important;      /* 覆寫桌機 hover 行為 */
+    position: static !important;   /* 手機不浮出 */
     box-shadow: none !important;
-    background: transparent;
+    background: transparent !important;
     padding: 0 0 6px 0;
-    margin: 0 0 0 12px;
+    margin: 0 0 0 12px;            /* 次層縮排 */
     border-radius: 0;
   }
-  nav li.open > ul { display: block !important; }
+  nav#site-nav li.open > ul { display: block !important; }
 
   /* 禁用手機 hover 展開 */
-  nav ul li:hover > ul { display: none; }
-
-  /* 讓桌機的水平列樣式不影響抽屜 */
-  nav > ul { display: none; }  /* 只對非 #site-nav 的 nav 影響 */
+  nav#site-nav ul li:hover > ul { display: none !important; }
 }
 
 /* 點擊無藍色高亮 */
