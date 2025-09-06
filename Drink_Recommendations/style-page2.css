@@ -207,35 +207,57 @@ nav ul li ul li a {
 }
 nav ul li ul li a:hover { background-color: #ddd; }
 
-/* ========== 手機版導覽（配合 nav.js） ========== */
+/* ========== 手機版導覽（右側抽屜；配合 nav.js） ========== */
 @media (max-width: 768px) {
   /* 顯示漢堡 */
-  .hamburger { display: inline-flex; }
+  .hamburger {
+    display: inline-flex;
+    position: fixed;
+    top: 12px;
+    right: 16px;
+  }
 
-  /* 主選單預設收合；.open 時展開 */
-  nav#site-nav > ul,
-  nav > ul {
-    display: none;
+  /* 抽屜容器：預設藏在右側；.active/.open 時滑出 */
+  nav#site-nav {
+    position: fixed !important;
+    top: 0;
+    right: -260px;               /* 初始右側隱藏 */
+    width: 260px;
+    height: 100dvh;
+    background: #f9f9f9;
+    box-shadow: -12px 0 24px rgba(0,0,0,.18);
+    transition: right .3s ease;
+    z-index: 1000;
+    padding-top: 60px;           /* 騰出上方讓漢堡不被遮住 */
+    border-bottom: 0;            /* 移除底邊框，避免抽屜邊緣線 */
+  }
+  nav#site-nav.active,
+  nav#site-nav.open {            /* 支援兩種 class */
+    right: 0;
+  }
+
+  /* 抽屜內部清單：垂直排列顯示（不再用 display:none 切換） */
+  nav#site-nav > ul {
+    display: flex !important;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
     gap: 0;
-    background: #f9f9f9;
-    padding: 6px 0;
-    border-bottom: 1px solid #eee;
+    background: transparent;
+    padding: 6px 0 12px;
+    margin: 0;
+    border-bottom: 0;
   }
-  nav#site-nav.open > ul,
-  nav.open > ul { display: flex; }
 
   /* 主層連結（更好點） */
   nav ul li > a {
-    padding: 12px 14px;
+    padding: 12px 16px;
     border-radius: 0;
   }
 
   /* 子選單預設關閉；由 JS 在 li 加 .open 時展開 */
   nav ul li ul {
-    display: none !important;      /* 覆寫桌機 hover */
+    display: none !important;      /* 覆寫桌機 hover 行為 */
     position: static !important;   /* 手機不浮出 */
     box-shadow: none !important;
     background: transparent;
@@ -247,6 +269,9 @@ nav ul li ul li a:hover { background-color: #ddd; }
 
   /* 禁用手機 hover 展開 */
   nav ul li:hover > ul { display: none; }
+
+  /* 讓桌機的水平列樣式不影響抽屜 */
+  nav > ul { display: none; }      /* 只對「非 #site-nav」的 nav 影響 */
 }
 
 /* 點擊無藍色高亮 */
