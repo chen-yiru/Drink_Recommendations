@@ -9,11 +9,7 @@ html, body {
 }
 
 /* ========== Global images ========== */
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+img { display: block; max-width: 100%; height: auto; }
 
 /* 列表頁縮圖 */
 .list .item img {
@@ -23,7 +19,7 @@ img {
   border-radius: 10px;
 }
 
-/* ========== 詳細頁卡片 ========== */
+/* ========== 詳細頁卡片：圖片上 + 分隔線 + 文字下 ========== */
 .container {
   display: flex;
   flex-direction: column;
@@ -34,53 +30,38 @@ img {
   background-color: rgba(255, 236, 168);
   border-radius: 40px;
 }
-.container .image img {
-  border-radius: 12px;
-  width: clamp(180px, 25vw, 320px);
-  height: auto;
+.container .image {
+  display: flex; justify-content: center; align-items: center;
+  width: 100%; margin: 0 auto; padding: 0;
 }
-.container .divider {
-  width: min(80%, 960px);
-  border: 0;
-  height: 2px;
-  background-color: #ccc;
-  margin: 20px 0;
-}
-.container .text {
-  text-align: left;
-  padding: 0 20px;
-  max-width: 800px;
-  line-height: 1.7;
-}
-.container .text h2 {
-  margin: 0 0 8px 0;
-}
+.container .image img { border-radius: 12px; width: clamp(180px, 25vw, 320px); height: auto; }
+.container .divider { width: min(80%, 960px); border: 0; height: 2px; background-color: #ccc; margin: 20px 0; }
+.container .text { text-align: left; padding: 0 20px; max-width: 800px; line-height: 1.7; }
+.container .text h2 { margin: 0 0 8px 0; }
 
 /* ========== Footer ========== */
-.footer {
-  margin-top: 10px;
-  text-align: center;
-  line-height: 100px;
-  background-color: #e2dfdf;
-}
-.footer img {
-  width: 50px;
-  height: 50px;
-}
+.footer { margin-top: 10px; text-align: center; line-height: 100px; background-color: #e2dfdf; }
+.footer img { width: 50px; height: 50px; }
 
 /* =========================================================
    導覽列（桌機＋行動版）
+   — 黏在最上方（position: sticky）
    ========================================================= */
+
+/* 置頂容器（品牌＋漢堡） */
 .nav-container {
-  position: static;   /* 🔹讓區塊在文件流中，不固定 */
-  z-index: 1000;
+  position: sticky;         /* 黏頂 */
+  top: 0;
+  z-index: 10010;           /* 壓在內容上方 */
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12px;
   padding: 10px 16px;
   background: #fff;
   border-bottom: 1px solid #eee;
 }
+
+/* 品牌（可留空但建議保留節點） */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -94,7 +75,7 @@ img {
 
 /* 漢堡按鈕 */
 .hamburger {
-  display: none;
+  display: none;            /* 桌機隱藏，手機顯示 */
   flex-direction: column;
   justify-content: center;
   gap: 5px;
@@ -104,26 +85,28 @@ img {
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fff;
+  margin-left: auto;        /* 推到右邊（即使沒有 .brand 也能靠右） */
   -webkit-tap-highlight-color: transparent;
+  z-index: 10011;           /* 高於下面 nav */
 }
 .hamburger span {
-  height: 3px;
-  width: 26px;
-  background: #000;
-  border-radius: 2px;
-  display: block;
-  margin: 0 auto;
+  height: 3px; width: 26px; background: #000; border-radius: 2px; display: block; margin: 0 auto;
   transition: transform .2s ease, opacity .2s ease;
 }
 .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-/* 主 nav（桌機） */
+/* 主 nav 區塊 */
 nav#site-nav {
+  position: sticky;         /* 也黏頂，確保展開時接在容器下方 */
+  top: 0;
+  z-index: 10005;
   background: #fff;
   border-bottom: 1px solid #eee;
 }
+
+/* 桌機：主選單水平排列 */
 nav#site-nav > ul {
   display: flex;
   align-items: center;
@@ -141,11 +124,9 @@ nav ul li > a {
   border-radius: 8px;
   line-height: 1.2;
 }
-nav ul li > a:hover {
-  background-color: #cdbba7;
-  color: #fff;
-}
-/* 子選單 */
+nav ul li > a:hover { background-color: #cdbba7; color: #fff; }
+
+/* 桌機：子選單（hover 展開） */
 nav ul li ul {
   display: none;
   position: absolute;
@@ -156,34 +137,49 @@ nav ul li ul {
   padding: 8px 0;
   border-radius: 10px;
   box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  z-index: 20;
 }
 nav ul li:hover > ul { display: block; }
+nav ul li ul li { width: 100%; display: block; }
+nav ul li ul li a { padding: 8px 16px; color: #333; border-radius: 0; }
+nav ul li ul li a:hover { background-color: #ddd; }
 
-/* ========== 手機版下拉式選單 ========== */
+/* ========== 手機版下拉式（配合 nav.js） ========== */
 @media (max-width: 768px) {
-  .hamburger { display: inline-flex; margin-left: auto; }
+  /* 顯示漢堡 */
+  .hamburger { display: inline-flex; }
+
+  /* 手機：主選單預設收合；.open 時展開（下拉） */
   nav#site-nav > ul {
     display: none !important;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
+    gap: 0;
     background: #f9f9f9;
     padding: 6px 0;
     border-bottom: 1px solid #eee;
   }
   nav#site-nav.open > ul { display: flex !important; }
 
+  /* 手機：主層連結更好點 */
   nav ul li > a { padding: 12px 14px; border-radius: 0; }
+
+  /* 手機：子選單改為內縮展開（點擊） */
   nav ul li ul {
-    display: none !important;
-    position: static !important;
+    display: none !important;      /* 覆寫桌機 hover */
+    position: static !important;   /* 不浮出 */
     box-shadow: none !important;
     background: transparent !important;
-    margin-left: 12px;
+    padding: 0 0 6px 0;
+    margin-left: 12px;             /* 次層縮排 */
+    border-radius: 0;
   }
   nav li.open > ul { display: block !important; }
+
+  /* 禁止手機 hover 展開，避免與點擊衝突 */
   nav ul li:hover > ul { display: none !important; }
 }
 
-/* 點擊無藍色高亮 */
+/* 小改善：點擊無藍色高亮 */
 nav a, .hamburger { -webkit-tap-highlight-color: transparent; }
