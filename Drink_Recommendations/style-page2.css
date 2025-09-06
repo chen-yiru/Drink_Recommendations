@@ -19,16 +19,16 @@ img {
 .list .item img {
   width: 300px;
   height: 300px;
-  object-fit: cover; /* 超出裁切，保持方形 */
+  object-fit: cover;
   border-radius: 10px;
 }
 
 /* ========== 詳細頁卡片：圖片上 + 分隔線 + 文字下 ========== */
 .container {
   display: flex;
-  flex-direction: column;    /* 垂直排列 */
-  align-items: center;       /* 水平置中內容 */
-  justify-content: center;   /* 垂直置中內容 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 20px;
   padding: 20px;
   background-color: rgba(255, 236, 168);
@@ -46,7 +46,6 @@ img {
 }
 .container .image img {
   border-radius: 12px;
-  /* 圖片彈性尺寸：視窗變化會在 180px～320px 間自動調整，通常約 25% 寬 */
   width: clamp(180px, 25vw, 320px);
   height: auto;
 }
@@ -64,7 +63,7 @@ img {
 .container .text {
   text-align: left;
   padding: 0 20px;
-  max-width: 800px;     /* 避免文字太寬難讀 */
+  max-width: 800px;
   line-height: 1.7;
 }
 .container .text h2 {
@@ -91,7 +90,6 @@ img {
    ========================================================= */
 
 /* 置頂容器（品牌＋漢堡） */
-/* 預設不黏頂：若想黏頂，改為 position: sticky; top: 0; */
 .nav-container {
   position: static;
   top: auto;
@@ -129,7 +127,7 @@ img {
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fff;
-  z-index: 10002;
+  z-index: 1100;
   -webkit-tap-highlight-color: transparent;
 }
 .hamburger span {
@@ -146,7 +144,6 @@ img {
 .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* 主 nav（桌機） */
-/* 預設不黏頂：若想黏頂，改為 position: sticky; 並設定 top */
 nav#site-nav,
 nav {
   background: #fff;
@@ -155,7 +152,6 @@ nav {
   z-index: 10000;
   border-bottom: 1px solid #eee;
 }
-
 nav > ul,
 nav#site-nav > ul {
   display: flex;
@@ -165,9 +161,7 @@ nav#site-nav > ul {
   margin: 0;
   padding: 8px 16px;
 }
-
 nav ul li { position: relative; }
-
 nav ul li > a {
   display: block;
   padding: 10px 16px;
@@ -195,11 +189,7 @@ nav ul li ul {
   z-index: 20;
 }
 nav ul li:hover > ul { display: block; }
-
-nav ul li ul li {
-  width: 100%;
-  display: block;
-}
+nav ul li ul li { width: 100%; display: block; }
 nav ul li ul li a {
   padding: 8px 16px;
   color: #333;
@@ -209,34 +199,45 @@ nav ul li ul li a:hover { background-color: #ddd; }
 
 /* ========== 手機版導覽（右側抽屜；配合 nav.js） ========== */
 @media (max-width: 768px) {
-  /* 顯示漢堡 */
+  /* 讓內容不會頂到固定在右上的漢堡 */
+  body {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
+  }
+
+  /* 顯示漢堡：固定右上，考量 iPhone 安全區 */
   .hamburger {
     display: inline-flex;
     position: fixed;
-    top: 12px;
-    right: 16px;
+    top: calc(env(safe-area-inset-top, 0px) + 12px);
+    right: calc(env(safe-area-inset-right, 0px) + 16px);
+  }
+
+  /* 讓品牌列在手機滾動時不被內容覆蓋 */
+  .nav-container{
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1001;
   }
 
   /* 抽屜容器：預設藏在右側；.active/.open 時滑出 */
   nav#site-nav {
     position: fixed !important;
     top: 0;
-    right: -260px;               /* 初始右側隱藏 */
+    right: -260px;
     width: 260px;
     height: 100dvh;
     background: #f9f9f9;
     box-shadow: -12px 0 24px rgba(0,0,0,.18);
     transition: right .3s ease;
     z-index: 1000;
-    padding-top: 60px;           /* 騰出上方讓漢堡不被遮住 */
-    border-bottom: 0;            /* 移除底邊框，避免抽屜邊緣線 */
+    padding-top: calc(env(safe-area-inset-top, 0px) + 60px);
+    border-bottom: 0;
   }
   nav#site-nav.active,
-  nav#site-nav.open {            /* 支援兩種 class */
-    right: 0;
-  }
+  nav#site-nav.open { right: 0; }
 
-  /* 抽屜內部清單：垂直排列顯示（不再用 display:none 切換） */
+  /* 抽屜內部清單 */
   nav#site-nav > ul {
     display: flex !important;
     flex-direction: column;
@@ -255,14 +256,14 @@ nav ul li ul li a:hover { background-color: #ddd; }
     border-radius: 0;
   }
 
-  /* 子選單預設關閉；由 JS 在 li 加 .open 時展開 */
+  /* 子選單在手機改為內縮展開 */
   nav ul li ul {
-    display: none !important;      /* 覆寫桌機 hover 行為 */
-    position: static !important;   /* 手機不浮出 */
+    display: none !important;
+    position: static !important;
     box-shadow: none !important;
     background: transparent;
     padding: 0 0 6px 0;
-    margin: 0 0 0 12px;            /* 次層縮排 */
+    margin: 0 0 0 12px;
     border-radius: 0;
   }
   nav li.open > ul { display: block !important; }
@@ -271,7 +272,7 @@ nav ul li ul li a:hover { background-color: #ddd; }
   nav ul li:hover > ul { display: none; }
 
   /* 讓桌機的水平列樣式不影響抽屜 */
-  nav > ul { display: none; }      /* 只對「非 #site-nav」的 nav 影響 */
+  nav > ul { display: none; }  /* 只對非 #site-nav 的 nav 影響 */
 }
 
 /* 點擊無藍色高亮 */
