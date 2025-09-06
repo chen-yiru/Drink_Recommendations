@@ -1,25 +1,5 @@
-/* nav.js — 漢堡選單 + 輪播（合併版）
- * 需求：
- * 1) 導覽結構需包含：
- *    - <button id="hamburger" ...>
- *    - <nav id="site-nav"><ul id="nav-list">...</ul></nav>
- *    - 子選單結構：<li><a>父層</a><ul>子選單</ul></li>
- * 2) 輪播結構需包含（若需要）：
- *    - <div class="slideshow-container" [data-interval="4000"] [data-start="1"]>
- *        <div class="mySlides"> ... </div>
- *        <div class="mySlides"> ... </div>
- *        <a class="prev">‹</a>
- *        <a class="next">›</a>
- *        <span class="dot"></span>...
- *      </div>
- *
- * 建議 CSS（手機）：
- *  @media (max-width:768px){
- *    #site-nav > ul { display:none; }
- *    #site-nav.open > ul { display:flex; flex-direction:column; }
- *    nav li ul { display:none !important; position:static !important; }
- *    nav li.open > ul { display:block !important; }
- *  }
+/* nav.js — 漢堡選單 + 輪播（合併版｜更新：配合右側抽屜，用 .active；向下相容 .open）
+ * 結構需求同前版，CSS 已支援 #site-nav.active/.open 從右側滑出
  */
 
 /* =========================
@@ -36,18 +16,26 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
   const siteNav   = document.getElementById('site-nav');
   const navList   = document.getElementById('nav-list');
 
-  if (!hamburger || !siteNav || !navList) {
-    // 沒導覽元素就不啟用（避免報錯）
-    return;
-  }
+  if (!hamburger || !siteNav || !navList) return;
 
   const isMobile = () => window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
 
+  function setBodyScrollLock(lock) {
+    document.documentElement.style.overflow = lock ? 'hidden' : '';
+    document.body.style.overflow = lock ? 'hidden' : '';
+  }
+
   function toggleNav(force) {
-    const willOpen = typeof force === 'boolean' ? force : !siteNav.classList.contains('open');
-    siteNav.classList.toggle('open', willOpen);
+    const isOpen = siteNav.classList.contains('active') || siteNav.classList.contains('open');
+    const willOpen = typeof force === 'boolean' ? force : !isOpen;
+
+    // 主要使用 .active；同時維持 .open 相容
+    siteNav.classList.toggle('active', willOpen);
+    siteNav.classList.toggle('open',   willOpen);
     hamburger.classList.toggle('active', willOpen);
     hamburger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    setBodyScrollLock(willOpen);
+
     if (!willOpen) closeAllSubmenus();
   }
 
@@ -56,7 +44,7 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
       li.classList.remove('open');
       const a = li.querySelector(':scope > a');
       if (a) a.setAttribute('aria-expanded', 'false');
-      li.removeAttribute('data-armed'); // 取消「首次點擊不跳轉」保護
+      li.removeAttribute('data-armed');
     });
   }
 
@@ -65,7 +53,7 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
     li.querySelector(':scope > ul')
   );
 
-  // 初始化有子選單的 li
+  // 初始化子選單父層
   submenuParents.forEach(li => {
     li.classList.add('has-submenu');
     const link = li.querySelector(':scope > a');
@@ -75,7 +63,7 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
     link.setAttribute('aria-haspopup', 'true');
     link.setAttribute('aria-expanded', 'false');
 
-    // 手機點擊：展開/收合子選單；第二次點同一父層才真的導向
+    // 手機：點父層先展開；若 href 為實體連結，需第二次點才跳轉
     link.addEventListener('click', (e) => {
       if (!isMobile()) return; // 桌機交給 CSS hover
 
@@ -83,7 +71,6 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
       const isHashOrVoid = href === '#' || href.trim().toLowerCase() === 'javascript:void(0)';
       const armed = li.hasAttribute('data-armed');
 
-      // 若未展開，先展開並攔截跳轉
       if (!li.classList.contains('open')) {
         e.preventDefault();
         // 關閉其他已開
@@ -98,27 +85,23 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
         li.classList.add('open');
         link.setAttribute('aria-expanded', 'true');
 
-        // 若 href 是實體連結，給一次「武裝」機會（第二次點才跳走）
-        if (!isHashOrVoid) {
-          li.setAttribute('data-armed', 'true');
-        }
+        if (!isHashOrVoid) li.setAttribute('data-armed', 'true');
         return;
       }
 
-      // 若已展開：
-      //  - 有子選單且 href 是實體連結：第一次點（armed=true）僅準備；第二次點才放行
+      // 已展開：有實體連結時，第一次武裝、第二次放行
       if (!isHashOrVoid) {
         if (!armed) {
           e.preventDefault();
           li.setAttribute('data-armed', 'true');
           return;
         }
-        // 第二次點：讓它照常導航，並關閉選單
+        // 第二次點擊：放行並收起抽屜
         toggleNav(false);
         return;
       }
 
-      // href 是 # 或 void(0) ：切換展開/收合
+      // # 或 void：切換展開
       e.preventDefault();
       const willOpen = !li.classList.contains('open');
       li.classList.toggle('open', willOpen);
@@ -127,31 +110,31 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
     });
   });
 
-  // 漢堡按鈕：開/關主選單
+  // 漢堡：開/關主選單
   hamburger.addEventListener('click', () => toggleNav());
 
-  // 點擊外部：若在手機狀態且目前開啟，則關閉
+  // 點外部關閉（僅手機）
   document.addEventListener('click', (e) => {
     if (!isMobile()) return;
-    if (!siteNav.classList.contains('open')) return;
+    const isOpen = siteNav.classList.contains('active') || siteNav.classList.contains('open');
+    if (!isOpen) return;
 
-    const insideNav = siteNav.contains(e.target) || hamburger.contains(e.target);
-    if (!insideNav) toggleNav(false);
+    if (!siteNav.contains(e.target) && !hamburger.contains(e.target)) toggleNav(false);
   });
 
   // ESC 關閉
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && siteNav.classList.contains('open')) {
-      toggleNav(false);
-    }
+    const isOpen = siteNav.classList.contains('active') || siteNav.classList.contains('open');
+    if (e.key === 'Escape' && isOpen) toggleNav(false);
   });
 
-  // 視窗尺寸變更：離開手機狀態時重置
+  // 尺寸變更：離開手機狀態時重置
   window.addEventListener('resize', () => {
     if (!isMobile()) {
-      siteNav.classList.remove('open');
+      siteNav.classList.remove('active', 'open');
       hamburger.classList.remove('active');
       hamburger.setAttribute('aria-expanded', 'false');
+      setBodyScrollLock(false);
       closeAllSubmenus();
     }
   });
@@ -167,12 +150,8 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
   const prevBtn = document.querySelector('.prev');
   const nextBtn = document.querySelector('.next');
 
-  if (!container || slides.length === 0) {
-    // 沒有輪播結構就不啟用
-    return;
-  }
+  if (!container || slides.length === 0) return;
 
-  // 可用 data-interval / data-start 覆寫預設
   const intervalFromData = Number(container.getAttribute('data-interval'));
   const startFromData = Number(container.getAttribute('data-start'));
   const AUTOPLAY_MS = Number.isFinite(intervalFromData) && intervalFromData > 0
@@ -205,51 +184,26 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
     }
   }
 
-  function go(delta) {
-    render(slideIndex + delta);
-  }
+  function go(delta)   { render(slideIndex + delta); }
+  function goTo(n)     { const i = (Number(n) || 1) - 1; render(i); }
 
-  function goTo(n) {
-    const idx = Number(n) - 1;
-    if (Number.isFinite(idx)) render(idx);
-  }
-
-  function startAutoplay() {
-    stopAutoplay();
-    timerId = setInterval(() => go(1), AUTOPLAY_MS);
-  }
-
-  function stopAutoplay() {
-    if (timerId) {
-      clearInterval(timerId);
-      timerId = null;
-    }
-  }
-
-  function pauseAutoplay() {
-    isPaused = true;
-    stopAutoplay();
-  }
-
-  function resumeAutoplay() {
-    if (!isPaused) return;
-    isPaused = false;
-    startAutoplay();
-  }
+  function startAutoplay() { stopAutoplay(); timerId = setInterval(() => go(1), AUTOPLAY_MS); }
+  function stopAutoplay()  { if (timerId) { clearInterval(timerId); timerId = null; } }
+  function pauseAutoplay() { isPaused = true; stopAutoplay(); }
 
   // 初始化
   render(slideIndex);
   startAutoplay();
 
   // 與 inline onclick 相容
-  window.plusSlides = function (n) { go(Number(n) || 1); };
-  window.currentSlide = function (n) { goTo(n); };
+  window.plusSlides   = (n) => go(Number(n) || 1);
+  window.currentSlide = (n) => goTo(n);
 
   // 按鈕
   if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
   if (nextBtn) nextBtn.addEventListener('click', () => go(1));
 
-  // dots 沒有 inline 的話補監聽
+  // dots 事件（若未使用 inline）
   if (dots.length) {
     dots.forEach((dot, i) => {
       if (!dot.hasAttribute('onclick')) {
@@ -300,9 +254,7 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
   });
 
   // 觸控滑動（手機）
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchMoved = false;
+  let touchStartX = 0, touchStartY = 0, touchMoved = false;
 
   container.addEventListener('touchstart', (e) => {
     if (!e.touches || !e.touches[0]) return;
@@ -316,9 +268,7 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
     if (!e.touches || !e.touches[0]) return;
     const dx = e.touches[0].clientX - touchStartX;
     const dy = e.touches[0].clientY - touchStartY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 20) {
-      touchMoved = true;
-    }
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 20) touchMoved = true;
   }, { passive: true });
 
   container.addEventListener('touchend', (e) => {
@@ -329,7 +279,7 @@ const SLIDE_AUTOPLAY_MS = 4000;   // 輪播預設自動播放間隔（毫秒）
       if (dx < -30) go(1);
     }
     isPaused = false;
-    if (wasInView) startAutoplay();
+    startAutoplay();
   });
 
   // 卸載清理
