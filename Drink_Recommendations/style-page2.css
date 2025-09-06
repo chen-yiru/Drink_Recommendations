@@ -8,36 +8,37 @@ html, body {
   background: #fff;
 }
 
-/* ========== Global img（維持比例，不再強制 300x300） ========== */
+/* ========== Global images（維持比例，不全站強制 300x300） ========== */
 img {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-/* 列表頁縮圖（例如首頁 .list .item 用 300x300） */
+/* 僅列表頁縮圖維持 300x300（例如首頁清單） */
 .list .item img {
   width: 300px;
   height: 300px;
-  object-fit: cover;  /* 超出裁切，保持方形 */
+  object-fit: cover; /* 超出裁切，保持方形 */
+  border-radius: 10px;
 }
 
-/* ========== 詳細頁 Container (圖片上＋分隔線＋文字下) ========== */
+/* ========== 詳細頁卡片：圖片上 + 分隔線 + 文字下 ========== */
 .container {
   display: flex;
-  flex-direction: column;   /* 垂直排列 */
-  align-items: center;      /* 水平置中 */
-  justify-content: center;  /* 垂直置中 */
+  flex-direction: column;    /* 垂直排列 */
+  align-items: center;       /* 水平置中內容 */
+  justify-content: center;   /* 垂直置中內容 */
   margin: 20px;
   padding: 20px;
-  background-color: rgba(255, 236, 168); /* 背景黃色 */
+  background-color: rgba(255, 236, 168);
   border-radius: 40px;
 }
 
-/* 詳細頁圖片 */
+/* 圖片區（置中） */
 .container .image {
   display: flex;
-  justify-content: center;   /* 水平置中圖片 */
+  justify-content: center;
   align-items: center;
   width: 100%;
   margin: 0 auto;
@@ -45,13 +46,14 @@ img {
 }
 .container .image img {
   border-radius: 12px;
-  width: clamp(160px, 25%, 280px);  /* 視窗縮放，最大 280px，最小 160px */
+  /* 圖片彈性尺寸：視窗變化會在 180px～320px 間自動調整，通常約 25% 寬 */
+  width: clamp(180px, 25vw, 320px);
   height: auto;
 }
 
 /* 分隔線 */
 .container .divider {
-  width: 80%;
+  width: min(80%, 960px);
   border: 0;
   height: 2px;
   background-color: #ccc;
@@ -62,16 +64,16 @@ img {
 .container .text {
   text-align: left;
   padding: 0 20px;
-  max-width: 800px;  /* 避免文字太散 */
+  max-width: 800px;     /* 避免文字太寬難讀 */
+  line-height: 1.7;
 }
 .container .text h2 {
-  margin-top: 0;
+  margin: 0 0 8px 0;
 }
 
 /* ========== Footer ========== */
 .footer {
   margin-top: 10px;
-  align-items: center;
   text-align: center;
   line-height: 100px;
   background-color: #e2dfdf;
@@ -81,11 +83,18 @@ img {
   height: 50px;
 }
 
-/* ========== 導覽列（桌機＋行動版） ========== */
+/* =========================================================
+   導覽列（桌機＋行動版）
+   結構：
+   <div class="nav-container"> 品牌 + 漢堡 </div>
+   <nav id="site-nav"><ul id="nav-list">...</ul></nav>
+   ========================================================= */
+
 /* 置頂容器（品牌＋漢堡） */
+/* 預設不黏頂：若想黏頂，改為 position: sticky; top: 0; */
 .nav-container {
-  position: sticky;
-  top: 0;
+  position: static;
+  top: auto;
   z-index: 10001;
   display: flex;
   justify-content: space-between;
@@ -95,6 +104,8 @@ img {
   background: #fff;
   border-bottom: 1px solid #eee;
 }
+
+/* 品牌 */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -104,9 +115,9 @@ img {
   color: #222;
   text-decoration: none;
 }
-.brand img { width: 28px; height: 28px; vertical-align: middle; }
+.brand img { width: 28px; height: 28px; }
 
-/* 漢堡按鈕 */
+/* 漢堡按鈕（桌機隱藏、手機顯示） */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -128,20 +139,23 @@ img {
   border-radius: 2px;
   display: block;
   margin: 0 auto;
+  transition: transform .2s ease, opacity .2s ease;
 }
 .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-.hamburger span { transition: transform .2s ease, opacity .2s ease; }
 
-/* 桌機 nav */
-nav#site-nav, nav {
+/* 主 nav（桌機） */
+/* 預設不黏頂：若想黏頂，改為 position: sticky; 並設定 top */
+nav#site-nav,
+nav {
   background: #fff;
-  position: sticky;
-  top: 56px;
+  position: static;
+  top: auto;
   z-index: 10000;
   border-bottom: 1px solid #eee;
 }
+
 nav > ul,
 nav#site-nav > ul {
   display: flex;
@@ -151,7 +165,9 @@ nav#site-nav > ul {
   margin: 0;
   padding: 8px 16px;
 }
+
 nav ul li { position: relative; }
+
 nav ul li > a {
   display: block;
   padding: 10px 16px;
@@ -164,6 +180,8 @@ nav ul li > a:hover {
   background-color: #cdbba7;
   color: #fff;
 }
+
+/* 桌機：子選單（hover 展開） */
 nav ul li ul {
   display: none;
   position: absolute;
@@ -177,14 +195,24 @@ nav ul li ul {
   z-index: 20;
 }
 nav ul li:hover > ul { display: block; }
-nav ul li ul li { width: 100%; display: block; }
-nav ul li ul li a { padding: 8px 16px; color: #333; border-radius: 0; }
+
+nav ul li ul li {
+  width: 100%;
+  display: block;
+}
+nav ul li ul li a {
+  padding: 8px 16px;
+  color: #333;
+  border-radius: 0;
+}
 nav ul li ul li a:hover { background-color: #ddd; }
 
-/* 手機版 nav */
+/* ========== 手機版導覽（配合 nav.js） ========== */
 @media (max-width: 768px) {
+  /* 顯示漢堡 */
   .hamburger { display: inline-flex; }
-  nav#site-nav, nav { top: 0; }
+
+  /* 主選單預設收合；.open 時展開 */
   nav#site-nav > ul,
   nav > ul {
     display: none;
@@ -197,23 +225,27 @@ nav ul li ul li a:hover { background-color: #ddd; }
     border-bottom: 1px solid #eee;
   }
   nav#site-nav.open > ul,
-  nav.open > ul {
-    display: flex;
-  }
+  nav.open > ul { display: flex; }
+
+  /* 主層連結（更好點） */
   nav ul li > a {
     padding: 12px 14px;
     border-radius: 0;
   }
+
+  /* 子選單預設關閉；由 JS 在 li 加 .open 時展開 */
   nav ul li ul {
-    display: none !important;
-    position: static !important;
+    display: none !important;      /* 覆寫桌機 hover */
+    position: static !important;   /* 手機不浮出 */
     box-shadow: none !important;
     background: transparent;
     padding: 0 0 6px 0;
-    margin: 0 0 0 12px;
+    margin: 0 0 0 12px;            /* 次層縮排 */
     border-radius: 0;
   }
   nav li.open > ul { display: block !important; }
+
+  /* 禁用手機 hover 展開 */
   nav ul li:hover > ul { display: none; }
 }
 
