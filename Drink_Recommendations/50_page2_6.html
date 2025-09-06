@@ -1,102 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>50嵐-多多綠</title>
-    <link rel="stylesheet" href="style-page2.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>50嵐－多多綠</title>
+
+  <!-- 套用你的共用樣式（含：圖片上／分隔線／文字下＋漢堡選單） -->
+  <link rel="stylesheet" href="style-page2.css" />
+
+  <!-- 本頁少量補強（可留可刪） -->
+  <style>
+    /* 置中卡片並限制最大寬度 */
+    .container { max-width: 1200px; margin: 24px auto; }
+  </style>
 </head>
-<style>
-    .container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        margin: 20px;
-        padding: 10px;
-        background-color: rgba(255,236,168);
-        /*調整背景顏色*/
-        border-radius: 40px;
-        z-index: -1;
-        width: auto;
-        height: 500px;
-    }
-    .image {
-        flex: 1;
-        padding: 20px;
-        margin-left: 100px;
-        /*調整中線跟照片的距離*/
-        margin-right: 150px;
-        /*調整中線跟字的距離*/
-        margin-top: 20px;
-    }
-</style>
-
 <body>
-    </a>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="Home.html">首頁</a></li>
-                <li><a href="#">各店菜單</a>
-                    <ul>
-                        <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
-                        <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
-                        <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
-                        <li><a href="images/wanpo-menu.png">萬波</a></li>
-                        <li><a href="images/50-menu.png">五十嵐</a></li>
-                        <li><a href="images/milksha-menu.png">迷客夏</a></li>
-                        <li><a href="images/guiji-menu.jpg">龜記</a></li>
-                        <li><a href="images/day-menu.jpg">一沐日</a></li>
-                        <li><a href="images/wootea-menu.jpg">五桐號</a></li>
-                        <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
-                        <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
-                        <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">各店首頁</a>
-                    <ul>
-                        <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-                        <li><a href="https://dejeng.com/">得正</a></li>
-                        <li><a href="https://8yotea.com/">八曜和茶</a></li>
-                        <li><a href="https://wanpotea.com/">萬波</a></li>
-                        <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-                        <li><a href="http://www.milkshoptea.com/index.php">迷客夏</a></li>
-                        <li><a href="https://guiji-group.com/">龜記</a></li>
-                        <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-                        <li><a href="https://www.wootea.com/">五桐號</a></li>
-                        <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-                        <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-                        <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
-                    </ul>
-                </li>
-             
-            </ul>
-        </nav>
-    </header>
 
+  <!-- 置頂導覽容器（品牌＋漢堡） -->
+  <div class="nav-container">
+    <a class="brand" href="Home.html" aria-label="回首頁">50嵐</a>
 
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- 主選單（支援手機漢堡展開） -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
+      <li><a href="Home.html">首頁</a></li>
+      <li>
+        <a href="#">各店菜單</a>
+        <ul>
+          <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
+          <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png">萬波</a></li>
+          <li><a href="images/50-menu.png">五十嵐</a></li>
+          <li><a href="images/milksha-menu.png">迷客夏</a></li>
+          <li><a href="images/guiji-menu.jpg">龜記</a></li>
+          <li><a href="images/day-menu.jpg">一沐日</a></li>
+          <li><a href="images/wootea-menu.jpg">五桐號</a></li>
+          <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
+          <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
+          <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener">得正</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener">萬波</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener">五十嵐</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener">迷客夏</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener">龜記</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener">一沐日</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener">五桐號</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener">茶湯會</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 內容標題 -->
+  <header class="header" style="text-align:center; padding:16px 0;">
+    <h1 style="margin:0; font-size:22px;">多多綠</h1>
+  </header>
+
+  <!-- 主要卡片：圖片在上／分隔線／文字在下 -->
+  <main>
     <div class="container">
+      <!-- 圖片 -->
+      <div class="image">
+        <!-- 若你的檔名中包含空白，實體路徑請確認無誤（建議改為無空白檔名） -->
+        <img src="images/50/50 多多綠.jpg" alt="多多綠" loading="lazy" />
+      </div>
 
+      <!-- 分隔線（由 style-page2.css 的 .divider 控制） -->
+      <hr class="divider" />
 
-
-        <div class="image">
-            <img src="images/50/50 多多綠.jpg" alt="多多綠">
-        </div>
-        <div class="text">
-            <h2>多多綠</h2>
-            <p>在綠茶裡面加入大人小孩都喜愛的養樂多，融合出清新順口的好滋味。 50 嵐多多綠喝起來既解渴又清涼，調配的比例非常剛好，保留了一點乳酸菌的酸甜，卻又不會過於甜膩，是大眾接受度很高的一款飲品。
-
-
-            </p>
-        </div>
-
-
+      <!-- 文字敘述 -->
+      <div class="text">
+        <h2>多多綠</h2>
+        <p>
+          在綠茶裡加入大人小孩都喜愛的養樂多，融合出清新順口的好滋味。50 嵐多多綠喝起來既解渴又清涼，
+          調配比例恰到好處，保留了乳酸菌的酸甜，卻不會過於甜膩，是大眾接受度極高的一款飲品。
+        </p>
+      </div>
     </div>
-    <footer class="footer">
-        <p>僅學校繳交報告使用</p>
-      </footer>
-</body>
+  </main>
 
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <p>僅學校繳交報告使用</p>
+  </footer>
+
+  <!-- 共用 JS（漢堡選單） -->
+  <script src="nav.js"></script>
+</body>
 </html>
