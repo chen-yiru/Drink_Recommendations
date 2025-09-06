@@ -1,99 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>8yo-牧場307</title>
-  <link rel="stylesheet" href="style-page2.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>八曜和茶－牧場307</title>
+
+  <!-- 共用樣式（含：圖片上／分隔線／文字下＋漢堡選單） -->
+  <link rel="stylesheet" href="style-page2.css" />
+
+  <!-- 本頁少量補強：背景色、白字、置中卡片寬度 -->
+  <style>
+    .container { max-width: 1200px; margin: 24px auto; background-color: rgb(58,108,105); }
+    .text { color: #fff; }
+  </style>
 </head>
-<style>
-  .container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 20px;
-    padding: 10px;
-    background-color: rgb(58, 108, 105);
-    /*調整背景顏色*/
-    border-radius: 40px;
-    z-index: -1;
-    width: auto;
-    height: 500px;
-  }
-
-  .text {
-    color: rgb(255, 255, 255);
-  }
-</style>
-
 <body>
 
-
-  </a>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="Untitled-1111.html">首頁</a></li>
-        <li><a href="#">各店菜單</a>
-          <ul>
-            <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
-            <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
-            <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
-            <li><a href="images/wanpo-menu.png">萬波</a></li>
-            <li><a href="images/50-menu.png">五十嵐</a></li>
-            <li><a href="images/milksha-menu.png">迷客夏</a></li>
-            <li><a href="images/guiji-menu.jpg">龜記</a></li>
-            <li><a href="images/day-menu.jpg">一沐日</a></li>
-            <li><a href="images/wootea-menu.jpg">五桐號</a></li>
-            <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
-            <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
-            <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
-          </ul>
-        </li>
-        <li><a href="#">各店首頁</a>
-          <ul>
-            <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-            <li><a href="https://dejeng.com/">得正</a></li>
-            <li><a href="https://8yotea.com/">八曜和茶</a></li>
-            <li><a href="https://wanpotea.com/">萬波</a></li>
-            <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-            <li><a href="http://www.milkshoptea.com/index.php">迷客夏</a></li>
-            <li><a href="https://guiji-group.com/">龜記</a></li>
-            <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-            <li><a href="https://www.wootea.com/">五桐號</a></li>
-            <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-            <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-            <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
-          </ul>
-        </li>
-       
-      </ul>
-    </nav>
-  </header>
+  <!-- 置頂導覽容器（品牌＋漢堡） -->
+  <div class="nav-container">
 
 
-  <div class="container">
-
-
-
-    <div class="image">
-      <img src="images/images/85.jpg" alt="Image">
-    </div>
-    <div class="text">
-      <h2>牧場307</h2>
-      <p>牧場307是以烏龍茶為基底的奶茶，牧場308則是以穀麥茶為基底，
-        308可能因為烘焙的關係我覺得喝起來有肉鬆的味道哈哈哈，
-        莫名的和諧也很清爽，兩者其實都很好喝，但牧場307的接受度相較之下比較高，
-        在GOOGLE評價可以看到擁護者相當多，很多人推薦茶乳的牧場307，給大家參考!
-    </div>
-
-
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+
+  <!-- 主選單（支援手機漢堡展開） -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
+      <li><a href="Home.html">首頁</a></li>
+      <li>
+        <a href="#">各店菜單</a>
+        <ul>
+          <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
+          <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png">萬波</a></li>
+          <li><a href="images/50-menu.png">五十嵐</a></li>
+          <li><a href="images/milksha-menu.png">迷客夏</a></li>
+          <li><a href="images/guiji-menu.jpg">龜記</a></li>
+          <li><a href="images/day-menu.jpg">一沐日</a></li>
+          <li><a href="images/wootea-menu.jpg">五桐號</a></li>
+          <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
+          <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
+          <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener">得正</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener">萬波</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener">五十嵐</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener">迷客夏</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener">龜記</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener">一沐日</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener">五桐號</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener">茶湯會</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+
+  <!-- 主要卡片：圖片在上／分隔線／文字在下 -->
+  <main>
+    <div class="container">
+      <!-- 圖片 -->
+      <div class="image">
+        <!-- 建議將圖片放到一致資料夾，例如 images/8yo/85.jpg -->
+        <img src="images/8yo/85.jpg" alt="牧場307" loading="lazy" />
+      </div>
+
+      <!-- 分隔線 -->
+      <hr class="divider" />
+
+      <!-- 文字敘述 -->
+      <div class="text">
+        <h2>牧場307</h2>
+        <p>
+          牧場307 以烏龍茶為基底調製成奶茶，茶香清雅、奶味柔順，接受度高、風味均衡。<br><br>
+          若喜歡更有焙香層次的口感，也可以嘗試同系列的 牧場308（穀麥茶為基底），
+          帶點烘焙香氣，清爽不膩，各有擁護者！
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 頁尾 -->
   <footer class="footer">
     <p>僅學校繳交報告使用</p>
   </footer>
-</body>
 
+  <!-- 共用 JS（漢堡選單） -->
+  <script src="nav.js"></script>
+</body>
 </html>
