@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
   <meta charset="UTF-8">
@@ -7,93 +7,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台灣第一味-當代雙Q</title>
   <link rel="stylesheet" href="style-page2.css">
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 16px;
+      background-color: rgb(132, 107, 89);
+      border-radius: 24px;
+    }
+    .image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+    }
+    .text { color: #fff; }
+    .text h2 { margin: 12px 0 8px; }
+    .text p { line-height: 1.75; }
+    @media (max-width: 768px){
+      .container { margin: 16px 12px; padding: 12px; }
+    }
+  </style>
 </head>
-<style>
-  .container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 20px;
-    padding: 20px;
-    background-color: rgb(132, 107, 89);
-    /*調整背景顏色*/
-    border-radius: 40px;
-    z-index: -1;
-    width: auto;
-    height: 500px;
-  }
-
-  .text {
-    color: rgb(255, 255, 255);
-  }
-
-  
-</style>
 
 <body>
 
-
-  </a>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="Home.html">首頁</a></li>
-        <li><a href="#">各店菜單</a>
-          <ul>
-            <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
-            <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
-            <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
-            <li><a href="images/wanpo-menu.png">萬波</a></li>
-            <li><a href="images/50-menu.png">五十嵐</a></li>
-            <li><a href="images/milksha-menu.png">迷客夏</a></li>
-            <li><a href="images/guiji-menu.jpg">龜記</a></li>
-            <li><a href="images/day-menu.jpg">一沐日</a></li>
-            <li><a href="images/wootea-menu.jpg">五桐號</a></li>
-            <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
-            <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
-            <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
-          </ul>
-        </li>
-        <li><a href="#">各店首頁</a>
-          <ul>
-            <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-            <li><a href="https://dejeng.com/">得正</a></li>
-            <li><a href="https://8yotea.com/">八曜和茶</a></li>
-            <li><a href="https://wanpotea.com/">萬波</a></li>
-            <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-            <li><a href="http://www.milkshoptea.com/index.php">迷客夏</a></li>
-            <li><a href="https://guiji-group.com/">龜記</a></li>
-            <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-            <li><a href="https://www.wootea.com/">五桐號</a></li>
-            <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-            <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-            <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
-          </ul>
-        </li>
-
-      </ul>
-    </nav>
-  </header>
-
-  <div class="container">
-
-
-
-    <div class="image">
-      <img src="images/tp tea/no2.jpg" alt="Image">
-    </div>
-    <div class="text">
-      <h2>當代雙Q</h2>
-      <p>嚴選大吉嶺紅茶調製成奶茶，珍珠加芋圓相聚在一杯濃濃奶茶之中，
-        呈現多層次的味覺，口口都有Q滋味</p>
-     
-    </div>
-
-
+  <!-- 導覽列（品牌空白 + 漢堡選單） -->
+  <div class="nav-container">
+    <a class="brand" href="Home.html" aria-label="回首頁"></a>
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+
+  <!-- 主選單 -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
+      <li><a href="Home.html">首頁</a></li>
+      <li>
+        <a href="#">各店菜單</a>
+        <ul>
+          <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
+          <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png">萬波</a></li>
+          <li><a href="images/50-menu.png">五十嵐</a></li>
+          <li><a href="images/milksha-menu.png">迷客夏</a></li>
+          <li><a href="images/guiji-menu.jpg">龜記</a></li>
+          <li><a href="images/day-menu.jpg">一沐日</a></li>
+          <li><a href="images/wootea-menu.jpg">五桐號</a></li>
+          <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
+          <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
+          <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener">得正</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener">萬波</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener">五十嵐</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener">迷客夏</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener">龜記</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener">一沐日</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener">五桐號</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener">茶湯會</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 主內容 -->
+  <main>
+    <div class="container">
+      <div class="image">
+        <img src="images/tp tea/no2.jpg" alt="當代雙Q" loading="lazy">
+      </div>
+      <hr class="divider" />
+      <div class="text">
+        <h2>當代雙Q</h2>
+        <p>
+          嚴選大吉嶺紅茶調製成奶茶，配上珍珠與芋圓雙 Q 配料，
+          在濃醇奶香與茶韻中呈現多層次口感，口口都有 Q 勁。
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 頁尾 -->
   <footer class="footer">
     <p>僅學校繳交報告使用</p>
   </footer>
-</body>
 
+  <!-- 漢堡選單控制 -->
+  <script src="nav.js"></script>
+</body>
 </html>
