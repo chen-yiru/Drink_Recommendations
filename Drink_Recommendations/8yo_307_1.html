@@ -9,47 +9,43 @@
   <!-- 共用樣式 -->
   <link rel="stylesheet" href="style-page2.css" />
 
-  <!-- 本頁少量補強 -->
+  <!-- 本頁少量補強（維持圖片在上、文字在下的卡片版型） -->
   <style>
     .container {
-      position: relative;
-      display: block;
+      max-width: 1200px;
       margin: 24px auto;
       padding: 16px;
-      max-width: 1200px;
       background-color: rgb(58,108,105);
       border-radius: 24px;
-      z-index: 0;
-      width: auto;
-      min-height: 300px;
     }
-    .image img{
-      display:block;
-      width:100%;
-      height:auto;
-      border-radius:16px;
+    .image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
     }
     .text { color: #fff; }
-    .text h2{ margin: 12px 0 8px; }
-    .text p{ line-height: 1.75; }
-    @media (min-width: 900px){
-      .container{
-        display:grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 20px;
-        align-items: center;
-      }
-    }
+    .text h2 { margin: 12px 0 8px; }
+    .text p  { line-height: 1.75; }
     @media (max-width: 768px){
-      .container{ margin: 16px 12px; padding: 12px; }
+      .container { margin: 16px 12px; padding: 12px; }
     }
+
+    /* 漢堡與品牌列的最基礎樣式（若已在 style-page2.css 內有定義，可省略） */
+    .nav-container {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 12px 16px;
+    }
+    .brand { text-decoration: none; font-weight: 600; color: #222; }
+    .hamburger { background: none; border: 0; cursor: pointer; width: 40px; height: 32px; }
+    .hamburger span { display: block; height: 3px; margin: 6px 0; background: #222; }
   </style>
 </head>
 <body>
 
   <!-- 置頂導覽容器（品牌＋漢堡） -->
   <div class="nav-container">
-
+    <a class="brand" href="Home.html" aria-label="回首頁">八曜和茶</a>
     <button id="hamburger" class="hamburger"
             type="button"
             aria-label="開啟選單"
@@ -100,11 +96,17 @@
     </ul>
   </nav>
 
-<main>
+  <!-- 內容標題 -->
+  <header class="header" style="text-align:center; padding:16px 0;">
+    <h1 style="margin:0; font-size:22px;">寧夏307</h1>
+  </header>
+
+  <!-- 主要卡片：圖片在上／分隔線／文字在下 -->
+  <main>
     <div class="container">
       <!-- 圖片 -->
       <div class="image">
-        <!-- 建議將圖片放到一致資料夾，例如 images/8yo/85.jpg -->
+        <!-- ✅ 保留原路徑，不做更改 -->
         <img src="images/images/86.jpg" alt="寧夏307" loading="lazy" />
       </div>
 
@@ -123,7 +125,7 @@
     </div>
   </main>
 
-  
+  <!-- 頁尾 -->
   <footer class="footer">
     <p>僅學校繳交報告使用</p>
   </footer>
@@ -132,4 +134,3 @@
   <script src="nav.js"></script>
 </body>
 </html>
-
