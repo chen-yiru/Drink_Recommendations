@@ -1,98 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>8yo-酸甜水果系－柚香覺醒307</title>
-  <link rel="stylesheet" href="style-page2.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>八曜和茶－柚香覺醒307</title>
+
+  <!-- 共用樣式 -->
+  <link rel="stylesheet" href="style-page2.css" />
+
+  <!-- 本頁少量補強 -->
+  <style>
+    /* 限制卡片最大寬度並置中 */
+    .container { max-width: 1200px; margin: 24px auto; }
+    /* 改為深綠背景＋文字白色 */
+    .container { background-color: rgb(58, 108, 105); }
+    .text { color: #fff; }
+  </style>
 </head>
-<style>
-  .container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 20px;
-    padding: 10px;
-    background-color: rgb(58, 108, 105);
-    /*調整背景顏色*/
-    border-radius: 40px;
-    z-index: -1;
-    width: auto;
-    height: 500px;
-  }
-
-  .text {
-    color: rgb(255, 255, 255);
-  }
-</style>
-
 <body>
 
+  <!-- 導覽容器（品牌＋漢堡） -->
+  <div class="nav-container">
 
-  </a>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="Untitled-1111.html">首頁</a></li>
-        <li><a href="#">各店菜單</a>
-          <ul>
-            <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
-            <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
-            <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
-            <li><a href="images/wanpo-menu.png">萬波</a></li>
-            <li><a href="images/50-menu.png">五十嵐</a></li>
-            <li><a href="images/milksha-menu.png">迷客夏</a></li>
-            <li><a href="images/guiji-menu.jpg">龜記</a></li>
-            <li><a href="images/day-menu.jpg">一沐日</a></li>
-            <li><a href="images/wootea-menu.jpg">五桐號</a></li>
-            <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
-            <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
-            <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
-          </ul>
-        </li>
-        <li><a href="#">各店首頁</a>
-          <ul>
-            <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-            <li><a href="https://dejeng.com/">得正</a></li>
-            <li><a href="https://8yotea.com/">八曜和茶</a></li>
-            <li><a href="https://wanpotea.com/">萬波</a></li>
-            <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-            <li><a href="http://www.milkshoptea.com/index.php">迷客夏</a></li>
-            <li><a href="https://guiji-group.com/">龜記</a></li>
-            <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-            <li><a href="https://www.wootea.com/">五桐號</a></li>
-            <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-            <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-            <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
-          </ul>
-        </li>
-        
-      </ul>
-    </nav>
-  </header>
-
-
-  <div class="container">
-
-
-
-    <div class="image">
-      <img src="images/images/81.jpg" alt="Image">
-    </div>
-    <div class="text">
-      <h2>酸甜水果系－柚香覺醒307</h2>
-      <p>店員最推的就是這款「柚香覺醒307」，是由307加上葡萄柚而製成，
-        而307是八曜和茶特有的輕焙烏龍茶，再加上產地直銷的葡萄柚來調配而成，
-        且是連著果皮榨製，擁有濃厚的果香還能吃到些微的果肉，整體喝起來是非常清爽的果茶。
-    </div>
-
-
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+
+  <!-- 主選單 -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
+      <li><a href="Home.html">首頁</a></li>
+      <li>
+        <a href="#">各店菜單</a>
+        <ul>
+          <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
+          <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png">萬波</a></li>
+          <li><a href="images/50-menu.png">五十嵐</a></li>
+          <li><a href="images/milksha-menu.png">迷客夏</a></li>
+          <li><a href="images/guiji-menu.jpg">龜記</a></li>
+          <li><a href="images/day-menu.jpg">一沐日</a></li>
+          <li><a href="images/wootea-menu.jpg">五桐號</a></li>
+          <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
+          <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
+          <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener">得正</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener">萬波</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener">五十嵐</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener">迷客夏</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener">龜記</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener">一沐日</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener">五桐號</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener">茶湯會</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 內容標題 -->
+ 
+
+  <!-- 主卡片 -->
+  <main>
+    <div class="container">
+      <!-- 圖片 -->
+      <div class="image">
+        <img src="images/8yo/81.jpg" alt="柚香覺醒307" loading="lazy" />
+      </div>
+
+      <!-- 分隔線 -->
+      <hr class="divider" />
+
+      <!-- 文字 -->
+      <div class="text">
+        <h2>酸甜水果系－柚香覺醒307</h2>
+        <p>
+          店員最推薦的就是這款「柚香覺醒307」，由八曜和茶特有的輕焙烏龍茶（307）搭配產地直送的葡萄柚調製而成。<br><br>
+          葡萄柚連皮現榨，濃厚果香中還能吃到果肉，與烏龍茶清香結合，整體喝起來酸甜清爽，
+          是夏日必點的人氣果茶！
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 頁尾 -->
   <footer class="footer">
     <p>僅學校繳交報告使用</p>
   </footer>
-</body>
 
+  <!-- 共用 JS -->
+  <script src="nav.js"></script>
+</body>
 </html>
