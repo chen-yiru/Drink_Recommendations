@@ -182,7 +182,7 @@ nav ul li ul li a {
 }
 nav ul li ul li a:hover { background-color: #ddd; }
 
-/* ========== 手機版導覽：下拉式（配合 nav.js） ========== */
+/* ========== 手機版導覽：固定右上角漢堡 + 下拉式選單 ========== */
 @media (max-width: 768px) {
   body { padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
 
