@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
   <meta charset="UTF-8">
@@ -7,110 +7,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>一沐日-芝麻拿鐵</title>
   <link rel="stylesheet" href="style-page2.css">
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 16px;
+      background-color: rgb(82, 132, 77);
+      border-radius: 24px;
+    }
+    .image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+    }
+    .text { color: #fff; }
+    .text h2 { margin: 12px 0 8px; }
+    .text p  { line-height: 1.75; }
+    @media (max-width: 768px){
+      .container { margin: 16px 12px; padding: 12px; }
+    }
+  </style>
 </head>
-<style>
-  .container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 20px;
-    padding: 10px;
-    background-color: rgb(82, 132, 77);
-    /*調整背景顏色*/
-    border-radius: 40px;
-    z-index: -1;
-  }
-
-  .image {
-    flex: 1;
-    padding: 20px;
-    margin-left: 50px;
-    /*調整中線跟照片的距離*/
-    margin-right: 150px;
-    /*調整中線跟字的距離*/
-    margin-top: 20px;
-
-  }
-
-  .image img {
-    max-width: 100%;
-    height: auto;
-  }
-  .text {
-    color: rgb(255, 255, 255);
-  }
-</style>
 
 <body>
 
-
-  </a>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="Home.html">首頁</a></li>
-        <li><a href="#">各店菜單</a>
-          <ul>
-            <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
-            <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
-            <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
-            <li><a href="images/wanpo-menu.png">萬波</a></li>
-            <li><a href="images/50-menu.png">五十嵐</a></li>
-            <li><a href="images/milksha-menu.png">迷客夏</a></li>
-            <li><a href="images/guiji-menu.jpg">龜記</a></li>
-            <li><a href="images/day-menu.jpg">一沐日</a></li>
-            <li><a href="images/wootea-menu.jpg">五桐號</a></li>
-            <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
-            <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
-            <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
-          </ul>
-        </li>
-        <li><a href="#">各店首頁</a>
-          <ul>
-            <li><a href="https://macutea.com.tw/">麻古茶坊</a></li>
-            <li><a href="https://dejeng.com/">得正</a></li>
-            <li><a href="https://8yotea.com/">八曜和茶</a></li>
-            <li><a href="https://wanpotea.com/">萬波</a></li>
-            <li><a href="http://50lan.com/web/news.asp">五十嵐</a></li>
-            <li><a href="http://www.milkshoptea.com/index.php">迷客夏</a></li>
-            <li><a href="https://guiji-group.com/">龜記</a></li>
-            <li><a href="https://www.aniceholiday.com.tw/">一沐日</a></li>
-            <li><a href="https://www.wootea.com/">五桐號</a></li>
-            <li><a href="https://www.kebuke.com/">可不可熟成紅茶</a></li>
-            <li><a href="https://www.teatop.com.tw/">台灣第一味</a></li>
-            <li><a href="https://tw.tp-tea.com/">茶湯會</a></li>
-          </ul>
-        </li>
-
-      </ul>
-    </nav>
-  </header>
-
-
-  <div class="container">
-
-
-
-    <div class="image">
-      <img src="images/y/sesame.jpg" alt="Image">
-    </div>
-    <div class="text">
-      <h2>芝麻拿鐵</h2>
-      <p>
-        有沒有想過，
-        為什麼同樣芝麻，有黑的，也有白的?
-        世界也是這樣，
-        沒有絕對的黑白，只有相對的。 </p>
-      <p>
-        黑芝麻顆粒研磨香氣濃厚，茶底為高山青，也可換招牌紅茶、烏龍、蕎麥，口感超級滑順，熱熱喝慢慢飲，推薦「無糖/一分甜」，另外芝麻系列還有「極黑芝麻奶茶」！
-      </p>
-    </div>
-
-
+  <!-- 導覽列（品牌空白 + 漢堡選單） -->
+  <div class="nav-container">
+    <a class="brand" href="Home.html" aria-label="回首頁"></a>
+    <button id="hamburger" class="hamburger"
+            type="button"
+            aria-label="開啟選單"
+            aria-expanded="false"
+            aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+
+  <!-- 主選單 -->
+  <nav id="site-nav" aria-label="主選單">
+    <ul id="nav-list">
+      <li><a href="Home.html">首頁</a></li>
+      <li>
+        <a href="#">各店菜單</a>
+        <ul>
+          <li><a href="images/macu-menu.jpg">麻古茶坊</a></li>
+          <li><a href="images/Oolong tea Project-menu.jpg">得正</a></li>
+          <li><a href="images/8yotea-menu.jpg">八曜和茶</a></li>
+          <li><a href="images/wanpo-menu.png">萬波</a></li>
+          <li><a href="images/50-menu.png">五十嵐</a></li>
+          <li><a href="images/milksha-menu.png">迷客夏</a></li>
+          <li><a href="images/guiji-menu.jpg">龜記</a></li>
+          <li><a href="images/day-menu.jpg">一沐日</a></li>
+          <li><a href="images/wootea-menu.jpg">五桐號</a></li>
+          <li><a href="images/kbuku-menu.jpg">可不可熟成紅茶</a></li>
+          <li><a href="images/teatop-menu.jpg">台灣第一味</a></li>
+          <li><a href="images/tp-tea-menu.png">茶湯會</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">各店首頁</a>
+        <ul>
+          <li><a href="https://macutea.com.tw/" target="_blank" rel="noopener">麻古茶坊</a></li>
+          <li><a href="https://dejeng.com/" target="_blank" rel="noopener">得正</a></li>
+          <li><a href="https://8yotea.com/" target="_blank" rel="noopener">八曜和茶</a></li>
+          <li><a href="https://wanpotea.com/" target="_blank" rel="noopener">萬波</a></li>
+          <li><a href="http://50lan.com/web/news.asp" target="_blank" rel="noopener">五十嵐</a></li>
+          <li><a href="http://www.milkshoptea.com/index.php" target="_blank" rel="noopener">迷客夏</a></li>
+          <li><a href="https://guiji-group.com/" target="_blank" rel="noopener">龜記</a></li>
+          <li><a href="https://www.aniceholiday.com.tw/" target="_blank" rel="noopener">一沐日</a></li>
+          <li><a href="https://www.wootea.com/" target="_blank" rel="noopener">五桐號</a></li>
+          <li><a href="https://www.kebuke.com/" target="_blank" rel="noopener">可不可熟成紅茶</a></li>
+          <li><a href="https://www.teatop.com.tw/" target="_blank" rel="noopener">台灣第一味</a></li>
+          <li><a href="https://tw.tp-tea.com/" target="_blank" rel="noopener">茶湯會</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 主內容 -->
+  <main>
+    <div class="container">
+      <div class="image">
+        <img src="images/y/sesame.jpg" alt="芝麻拿鐵" loading="lazy">
+      </div>
+      <hr class="divider" />
+      <div class="text">
+        <h2>芝麻拿鐵</h2>
+        <p>
+          有沒有想過，為什麼同樣芝麻，有黑的，也有白的？  
+          世界也是如此，沒有絕對的黑白，只有相對的。
+        </p>
+        <p>
+          黑芝麻研磨香氣濃厚，茶底選用高山青，  
+          也可換成招牌紅茶、烏龍或蕎麥。  
+          口感滑順，熱熱喝更能慢慢回味。  
+          推薦「無糖 / 一分甜」，  
+          另外還有隱藏版的「極黑芝麻奶茶」！
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 頁尾 -->
   <footer class="footer">
     <p>僅學校繳交報告使用</p>
   </footer>
-</body>
 
+  <script src="nav.js"></script>
+</body>
 </html>
