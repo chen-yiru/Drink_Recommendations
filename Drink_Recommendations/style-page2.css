@@ -8,14 +8,14 @@ html, body {
   background: #fff;
 }
 
-/* ========== Global images（維持比例，不全站強制 300x300） ========== */
+/* ========== Global images ========== */
 img {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-/* 僅列表頁縮圖維持 300x300（例如首頁清單） */
+/* 列表頁縮圖 */
 .list .item img {
   width: 300px;
   height: 300px;
@@ -34,8 +34,6 @@ img {
   background-color: rgba(255, 236, 168);
   border-radius: 40px;
 }
-
-/* 圖片區（置中） */
 .container .image {
   display: flex;
   justify-content: center;
@@ -49,8 +47,6 @@ img {
   width: clamp(180px, 25vw, 320px);
   height: auto;
 }
-
-/* 分隔線 */
 .container .divider {
   width: min(80%, 960px);
   border: 0;
@@ -58,8 +54,6 @@ img {
   background-color: #ccc;
   margin: 20px 0;
 }
-
-/* 文字區 */
 .container .text {
   text-align: left;
   padding: 0 20px;
@@ -84,26 +78,17 @@ img {
 
 /* =========================================================
    導覽列（桌機＋行動版）
-   結構：
-   <div class="nav-container"> 品牌 + 漢堡 </div>
-   <nav id="site-nav"><ul id="nav-list">...</ul></nav>
    ========================================================= */
-
-/* 置頂容器（品牌＋漢堡） */
 .nav-container {
   position: static;
   top: auto;
   z-index: 10001;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 12px;
   padding: 10px 16px;
   background: #fff;
   border-bottom: 1px solid #eee;
 }
-
-/* 品牌 */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -115,7 +100,7 @@ img {
 }
 .brand img { width: 28px; height: 28px; }
 
-/* 漢堡按鈕（桌機隱藏、手機顯示） */
+/* 漢堡按鈕 */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -128,6 +113,7 @@ img {
   border-radius: 8px;
   background: #fff;
   z-index: 1100;
+  margin-left: auto; /* 桌機推到右邊 */
   -webkit-tap-highlight-color: transparent;
 }
 .hamburger span {
@@ -174,8 +160,7 @@ nav ul li > a:hover {
   background-color: #cdbba7;
   color: #fff;
 }
-
-/* 桌機：子選單（hover 展開） */
+/* 桌機子選單 */
 nav ul li ul {
   display: none;
   position: absolute;
@@ -197,23 +182,17 @@ nav ul li ul li a {
 }
 nav ul li ul li a:hover { background-color: #ddd; }
 
-/* ========== 手機版導覽（下拉式；漢堡在右上角） ========== */
+/* ========== 手機版導覽：下拉式（配合 nav.js） ========== */
 @media (max-width: 768px) {
-  /* 預留空間避免漢堡被蓋住 */
-  body {
-    padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
-  }
+  body { padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
 
-  /* 漢堡固定在螢幕右上角 */
+  /* 固定漢堡在右上角 */
   .hamburger {
     display: inline-flex;
     position: fixed;
     top: calc(env(safe-area-inset-top, 0px) + 12px);
     right: calc(env(safe-area-inset-right, 0px) + 16px);
-    z-index: 1100;
   }
-
-  /* nav-container 依舊置頂 */
   .nav-container {
     position: sticky;
     top: 0;
@@ -221,12 +200,11 @@ nav ul li ul li a:hover { background-color: #ddd; }
     z-index: 1001;
   }
 
-  /* 下拉選單 */
+  /* 下拉式選單 */
   nav#site-nav {
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid #eee;
   }
   nav#site-nav > ul {
     display: none !important;
@@ -240,19 +218,20 @@ nav ul li ul li a:hover { background-color: #ddd; }
   }
   nav#site-nav.open > ul { display: flex !important; }
 
-  /* 子選單：點擊展開 */
-  nav#site-nav ul li ul {
+  nav ul li > a {
+    padding: 12px 14px;
+    border-radius: 0;
+  }
+  nav ul li ul {
     display: none !important;
     position: static !important;
     box-shadow: none !important;
     background: transparent !important;
     padding: 0 0 6px 0;
-    margin: 0 0 0 12px;
+    margin-left: 12px;
   }
-  nav#site-nav li.open > ul { display: block !important; }
-
-  /* 禁止 hover 展開 */
-  nav#site-nav ul li:hover > ul { display: none !important; }
+  nav li.open > ul { display: block !important; }
+  nav ul li:hover > ul { display: none !important; }
 }
 
 /* 點擊無藍色高亮 */
